@@ -13,4 +13,5 @@ urlpatterns = [
         kwargs={'next_page': settings.LOGIN_URL}),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile_change/$', views.profile_change, name='profile_change'),
 ]

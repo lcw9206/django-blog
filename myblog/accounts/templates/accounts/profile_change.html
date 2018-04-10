@@ -1,0 +1,12 @@
+{% extends 'accounts/layout.html' %}
+
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        <p>{{ user }}</p>
+        <p>{{ form.as_p }}</p>
+    </table>
+    <input type="submit"/>
+</form>
+{% endblock %}

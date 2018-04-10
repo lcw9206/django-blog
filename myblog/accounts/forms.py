@@ -7,7 +7,7 @@ from django import forms
 
 
 class SignupForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(required=True, label='이메일')
 
     class Meta(UserCreationForm.Meta):
         fields = UserCreationForm.Meta.fields + ('email', ) # User 모델의 email 필드 이용
@@ -24,3 +24,20 @@ class SignupForm(UserCreationForm):
     def save(self):
         user = super().save()
         return user
+
+
+class ProfileForm(forms.ModelForm):
+    about = forms.CharField(label='자기소개', required=False, widget=forms.Textarea(attrs={
+            'row': 50,
+            'placeholder': '100자 이하로 등록해주세요'
+    }))
+
+    class Meta:
+        model = Profile
+        fields = ['about']
+
+    def clean_about(self):
+        about = self.cleaned_data['about']
+        if not about:
+            about = None
+        return about
