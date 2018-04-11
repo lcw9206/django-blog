@@ -9,7 +9,7 @@ from django.contrib import messages
 
 def signup(request):
     if request.method == 'POST':
-        form = SignupForm(request.POST)
+        form = SignupForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('login')
@@ -28,10 +28,8 @@ def profile(request):
 @login_required()
 def profile_change(request):
     profile = get_object_or_404(Profile, pk=request.user.profile.id)
-    print(request.user.profile.id)
-    print('=====================')
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         print(form)
         if form.is_valid():
             form.save()

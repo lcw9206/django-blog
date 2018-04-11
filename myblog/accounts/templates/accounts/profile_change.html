@@ -1,11 +1,13 @@
 {% extends 'accounts/layout.html' %}
+{% load static %}
 
 {% block content %}
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
         <p>{{ user }}</p>
-        <p>{{ form.as_p }}</p>
+        <p>{{ form.about }}</p>
+        <p>{{ form.photo_thumbnail }}</p>
     </table>
     <input type="submit"/>
 </form>

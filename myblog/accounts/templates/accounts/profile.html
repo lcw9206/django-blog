@@ -3,6 +3,10 @@
 {% block content %}
 <form action="" method="POST">
     {% csrf_token %}
+    {{ user.profile.photo_thumbnail }}
+    {% if user.profile.photo_thumbnail %}
+        <li>프로필 사진: <img src="{{ user.profile.photo_thumbnail.url }}"/></li>
+    {% endif %}
     <p>아이디: {{ user.username }}</p>
     <p>이메일: {{ user.email }}</p>
     <p>가입일자: {{ user.date_joined }}</p>
