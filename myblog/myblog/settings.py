@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'imagekit',
     'accounts.apps.AccountsConfig',
+    'post.apps.PostConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
