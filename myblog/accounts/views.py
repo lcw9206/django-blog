@@ -30,9 +30,9 @@ def profile_change(request):
     profile = get_object_or_404(Profile, pk=request.user.profile.id)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
-        print(form)
         if form.is_valid():
             form.save()
+
             return redirect('profile')
     else:
         form = ProfileForm(instance=profile)
