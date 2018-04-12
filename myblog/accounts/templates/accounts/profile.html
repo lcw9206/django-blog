@@ -16,5 +16,6 @@
     <p>가입일자: {{ user.date_joined }}</p>
     <p>자기소개: {{ user.profile.about }}</p>
     <a href="{% url "profile_change" %}">프로필 수정하기</a>
+    <a href="{% url "password_change" %}">비밀번호 변경</a>
 </form>
 {% endblock %}
