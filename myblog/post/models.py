@@ -10,7 +10,7 @@ import datetime
 def set_post_path(instance, filename):
     now = datetime.datetime.now()
 
-    path = 'images/post/{usename}/{year}_{month}_{day}/{micro}.{extension}'.format(
+    path = 'images/post/{username}/{year}_{month}_{day}/{micro}.{extension}'.format(
         username=instance.user.username,
         year=now.year,
         month=now.month,
