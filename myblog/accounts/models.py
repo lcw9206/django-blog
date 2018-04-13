@@ -8,10 +8,10 @@ from imagekit.processors import Thumbnail
 import datetime
 
 
-def set_image_path(instance, filename):
+def set_profile_path(instance, filename):
     now = datetime.datetime.now()
 
-    path = "images/{username}/{year}_{month}_{day}/{micro}.{extension}".format(
+    path = "images/profile/{username}/{year}_{month}_{day}/{micro}.{extension}".format(
         username=instance.user.username,
         year=now.year,
         month=now.month,
@@ -25,8 +25,8 @@ def set_image_path(instance, filename):
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     about = models.CharField(max_length=100, blank=True)
-    photo_thumbnail = ProcessedImageField(
-        upload_to=set_image_path,
+    profile_thumbnail = ProcessedImageField(
+        upload_to=set_profile_path,
         processors=[Thumbnail(200, 200)],
         format='JPEG',
         options={'quality': 60},
