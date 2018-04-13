@@ -24,6 +24,7 @@ def set_post_path(instance, filename):
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     post_thumbnail = ProcessedImageField(
+        verbose_name='사진',
         upload_to=set_post_path,
         processors=[Thumbnail(200, 200)],
         format='JPEG',
@@ -32,5 +33,8 @@ class Post(models.Model):
     )
     title = models.CharField(max_length=100, verbose_name='제목', help_text='100자 이내로 입력해주세요.')
     content = models.CharField(max_length=150, verbose_name='내용', help_text='150자 이내로 입력해주세요.')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='생성일자')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='수정일자')
+
+    class Meta:
+        ordering = ['-created_at']

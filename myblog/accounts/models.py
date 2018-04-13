@@ -24,8 +24,9 @@ def set_profile_path(instance, filename):
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    about = models.CharField(max_length=100, blank=True)
+    about = models.CharField(max_length=100, blank=True, verbose_name='자기소개')
     profile_thumbnail = ProcessedImageField(
+        verbose_name='프로필 사진',
         upload_to=set_profile_path,
         processors=[Thumbnail(200, 200)],
         format='JPEG',
