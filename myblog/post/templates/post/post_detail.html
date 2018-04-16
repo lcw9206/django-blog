@@ -1,0 +1,14 @@
+{% extends 'post/layout.html' %}
+
+{% block content %}
+<form action="" method="POST" enctype="multipart/form-data">
+    <table>
+        <p>{{ post.title }}</p><hr/>
+        <p>{{ post.content }}</p>
+        {% if post.post_thumbnail %}
+            <p><img src="{{ post.post_thumbnail.url }}"/></p>
+        {% endif %}
+        <p>{{ post.updated_at }}</p>
+    </table>
+</form>
+{% endblock %}
