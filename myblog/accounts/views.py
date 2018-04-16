@@ -32,10 +32,9 @@ def profile_change(request):
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-
             return redirect('profile')
     else:
         form = ProfileForm(instance=profile)
-    return render(request,'accounts/profile_change.html', {
+    return render(request, 'accounts/profile_change.html', {
         'form': form
     })

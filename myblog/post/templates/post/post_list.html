@@ -1,22 +1,25 @@
 {% extends 'post/layout.html' %}
 
 {% block content %}
-<h1>글 목록</h1><hr/>
-{% for post in post_list %}
+<h1>글 목록</h1><hr/>  <p><a href="{% url "post_new" %}">글쓰기</a></p>
     <table>
         <thead>
             <span><tr> 번호 </tr></span>
             <span><tr> 글쓴이 </tr></span>
             <span><tr> 제목 </tr></span>
             <span><tr> 내용 </tr></span>
+            <span><tr> 날짜 </tr></span>
         </thead>
         <tbody>
-            <td>{{ post.id }}</td>
-            <td>{{ post.user }}</td>
-            <td>{{ post.title }}</td>
-            <td>{{ post.content }}</td>
+            {% for post in post_list %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.user }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.content }}</td>
+                <td>{{ post.created_at }}</td>
+            </tr>
+            {% endfor %}
         </tbody>
-    </table>
-{% endfor %}
     </table>
 {% endblock %}
