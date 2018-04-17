@@ -22,6 +22,13 @@ def set_post_path(instance, filename):
     return path
 
 
+class Category(models.Model):
+    name = models.CharField("카테고리명", max_length=20)
+
+    def __str__(self):
+        return self.name
+
+
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post_thumbnail = ProcessedImageField(
@@ -36,6 +43,7 @@ class Post(models.Model):
     content = models.CharField(max_length=150, verbose_name='내용')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='생성일자')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='수정일자')
+    category = models.ForeignKey(Category, null=False, verbose_name="카테고리")
 
     class Meta:
         ordering = ['-created_at']
