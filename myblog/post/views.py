@@ -14,8 +14,8 @@ def post_list(request):
     })
 
 
-def post_detail(request,id):
-    post = Post.objects.get(id=id)
+def post_detail(request, id):
+    post = get_object_or_404(Post,id=id)
 
     return render(request, 'post/post_detail.html', {
         'post': post,
@@ -30,9 +30,17 @@ def post_new(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-        return redirect('post/post_list.html')
+        return redirect('post_list')
     else:
         form = PostForm()
     return render(request, 'post/post_form.html', {
         'form': form
     })
+
+
+@login_required
+def post_delete(request, id):
+    post = get_object_or_404(Post, id=id)
+    if request.method == "POST":
+        post.delete()
+    return redirect('post_list')

@@ -1,14 +1,17 @@
 {% extends 'post/layout.html' %}
 
 {% block content %}
-<form action="" method="POST" enctype="multipart/form-data">
-    <table>
-        <p>{{ post.title }}</p><hr/>
-        <p>{{ post.content }}</p>
-        {% if post.post_thumbnail %}
-            <p><img src="{{ post.post_thumbnail.url }}"/></p>
-        {% endif %}
-        <p>{{ post.updated_at }}</p>
-    </table>
-</form>
+<table>
+    <p>{{ post.title }}</p><hr/>
+    <p>{{ post.content }}</p>
+    {% if post.post_thumbnail %}
+        <p><img src="{{ post.post_thumbnail.url }}"/></p>
+    {% endif %}
+    <p>{{ post.updated_at }}</p>
+    <form action="{% url "post_delete" post.id %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="삭제" onclick="return confirm('삭제하시겠습니까?')">
+    </form>
+</table>
+
 {% endblock %}
