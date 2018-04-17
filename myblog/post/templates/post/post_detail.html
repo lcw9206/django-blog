@@ -8,11 +8,12 @@
         <p><img src="{{ post.post_thumbnail.url }}"/></p>
     {% endif %}
     <p>{{ post.updated_at }}</p>
+
+    <button><a href="{% url "post:post_edit" post.id %}" methods="POST">글 수정</a></button>
     <form action="{% url "post:post_delete" post.id %}" method="POST">
         {% csrf_token %}
         <input type="submit" value="삭제" onclick="return confirm('삭제하시겠습니까?')">
     </form>
-    <button><a href="{% url "post:post_edit" post.id %}" methods="POST">글 수정</a></button>
 </table>
 
 {% endblock %}
