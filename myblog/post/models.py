@@ -23,7 +23,7 @@ def set_post_path(instance, filename):
 
 
 class Post(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post_thumbnail = ProcessedImageField(
         verbose_name='사진',
         upload_to=set_post_path,
