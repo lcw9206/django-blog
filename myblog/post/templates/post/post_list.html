@@ -1,7 +1,7 @@
 {% extends 'post/layout.html' %}
 
 {% block content %}
-<h1>글 목록</h1><hr/>  <p><a href="{% url "post_new" %}">글쓰기</a></p>
+<h1>글 목록</h1><hr/>  <p><a href="{% url "post:post_new" %}">글쓰기</a></p>
 <table>
     <thead>
         <span><tr> 번호 </tr></span>
@@ -13,7 +13,7 @@
     <tbody>
         {% for post in post_list %}
         <tr>
-            <td><a href="{% url "post_detail" post.id %}">{{ post.id }}</td>
+            <td><a href="{% url "post:post_detail" post.id %}">{{ post.id }}</td>
             <td>{{ post.user }}</td>
             <td>{{ post.title }}</td>
             <td>{{ post.content }}</td>
