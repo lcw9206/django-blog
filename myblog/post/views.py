@@ -30,7 +30,7 @@ def post_new(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-        return redirect('post_list')
+        return redirect('post:post_list')
     else:
         form = PostForm()
     return render(request, 'post/post_form.html', {
@@ -43,4 +43,19 @@ def post_delete(request, id):
     post = get_object_or_404(Post, id=id)
     if request.method == "POST":
         post.delete()
-    return redirect('post_list')
+    return redirect('post:post_list')
+
+
+@login_required
+def post_edit(request, id):
+    post = get_object_or_404(Post, id=id)
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+        return redirect('post:post_list')
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'post/post_form.html', {
+        'form': form
+    })
