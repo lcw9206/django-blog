@@ -12,17 +12,20 @@ def signup(request):
         form = SignupForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, '회원가입이 완료되었습니다.')
             return redirect('login')
+        else:
+            messages.error(request, '회원가입에 실패하였습니다.')
     else:
         form = SignupForm()
-    return render(request, 'accounts/signup_form.html',{
+    return render(request, 'accounts/signup_form.html', {
         'form': form,
     })
 
 
 @login_required()
 def profile(request):
-    return render(request,'accounts/profile.html')
+    return render(request, 'accounts/profile.html')
 
 
 @login_required()
@@ -32,7 +35,10 @@ def profile_change(request):
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
+            messages.success(request, '프로필 변경이 완료되었습니다.')
             return redirect('profile')
+        else:
+            messages.error(request, '프로필 변경에 실패하였습니다.')
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'accounts/profile_change.html', {
