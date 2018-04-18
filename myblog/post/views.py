@@ -9,14 +9,19 @@ from django.contrib import messages
 
 def post_list(request):
     list_query = Post.objects.all()
+    search = request.GET.get('search', '')
+
+    if search:
+        list_query = list_query.filter(title__icontains=search)
 
     return render(request, 'post/post_list.html', {
         'post_list': list_query,
+        'search': search,
     })
 
 
 def post_detail(request, id):
-    post = get_object_or_404(Post,id=id)
+    post = get_object_or_404(Post, id=id)
 
     return render(request, 'post/post_detail.html', {
         'post': post,
