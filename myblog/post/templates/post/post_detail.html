@@ -2,18 +2,17 @@
 
 {% block content %}
 <table>
-    <p>{{ post.title }}</p><hr/>
+    <h1><p>{{ post.title }}</p></h1><hr/>
     <p>{{ post.content }}</p>
     {% if post.post_thumbnail %}
         <p><img src="{{ post.post_thumbnail.url }}"/></p>
     {% endif %}
-    <p>{{ post.updated_at }}</p>
+    <p>{{ post.updated_at }}</p><hr/>
 
-    <button><a href="{% url "post:post_edit" post.id %}" methods="POST">글 수정</a></button>
+    <button><a href="{% url "post:post_edit" post.id %}" method="POST">글 수정</a></button>
     <form action="{% url "post:post_delete" post.id %}" method="POST">
         {% csrf_token %}
         <input type="submit" value="삭제" onclick="return confirm('삭제하시겠습니까?')">
     </form>
 </table>
-
 {% endblock %}
