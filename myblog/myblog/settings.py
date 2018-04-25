@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'debug_toolbar',
     'imagekit',
+    'el_pagination',
     'accounts.apps.AccountsConfig',
     'post.apps.PostConfig',
 ]

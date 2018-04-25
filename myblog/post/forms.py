@@ -1,7 +1,7 @@
 # post/forms.py
 
 from django import forms
-from .models import Post
+from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
@@ -24,3 +24,13 @@ class PostForm(forms.ModelForm):
         if not content:
             content = None
         return content
+
+
+class CommentForm(forms.ModelForm):
+    content = forms.CharField(widget=forms.Textarea(attrs={
+        'placeholder': '댓글을 입력해주세요.'
+    }))
+
+    class Meta:
+        model = Comment
+        fields = ['content']
