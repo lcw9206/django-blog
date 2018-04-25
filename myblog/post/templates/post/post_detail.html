@@ -8,6 +8,7 @@
         <p><img src="{{ post.post_thumbnail.url }}"/></p>
     {% endif %}
     <p>{{ post.updated_at }}</p><hr/>
+    <p>작성자 : {{ post.user }}</p>
 
     <button><a href="{% url "post:post_edit" post.id %}" method="POST">글 수정</a></button>
     <form action="{% url "post:post_delete" post.id %}" method="POST">

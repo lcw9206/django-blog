@@ -33,7 +33,7 @@ class Category(models.Model):
 class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
     post = models.ForeignKey('POST')
-    content = models.CharField(max_length=60)
+    content = models.CharField(max_length=60, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
