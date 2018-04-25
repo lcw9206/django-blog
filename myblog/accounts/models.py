@@ -36,3 +36,6 @@ class Profile(models.Model):
 
     def get_user(self):
         return User.objects.get(pk=self.user)
+
+    def __str__(self):
+        return self.user
