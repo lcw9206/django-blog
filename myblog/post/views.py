@@ -1,8 +1,8 @@
 # post/views.py
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -22,9 +22,11 @@ def post_list(request):
 
 def post_detail(request, id):
     post = get_object_or_404(Post, id=id)
+    comment_form = CommentForm()
 
     return render(request, 'post/post_detail.html', {
         'post': post,
+        'comment_form': comment_form,
     })
 
 
@@ -76,7 +78,7 @@ def post_edit(request, id):
         if form.is_valid():
             form.save()
             messages.success(request, '글 수정에 성공했습니다.')
-            return redirect('post:post_list')
+            return redirect('post:post_detail')
         else:
             messages.error(request, '글 수정에 실패했습니다.')
     else:
@@ -85,3 +87,25 @@ def post_edit(request, id):
     return render(request, 'post/post_form.html', {
         'form': form
     })
+
+
+@login_required
+def comment_new(request, id):
+    post = get_object_or_404(Post, id=id)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            messages.success(request, "댓글이 등록되었습니다.")
+            return render(request, 'post/post_detail.html', {
+                'post': post,
+                'comments': comment,
+            })
+        else:
+            messages.error(request, "댓글 등록에 실패했습니다.")
+
+    return redirect('post:post_detail')

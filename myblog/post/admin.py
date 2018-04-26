@@ -16,4 +16,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'post', 'content', 'created_at', 'updated_at']
+    list_display = ['author', 'post', 'content', 'created_at', 'updated_at']
