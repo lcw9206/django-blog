@@ -11,6 +11,10 @@
 
     <p>{{ post.updated_at }}</p><hr/>
 
+    {% for comment in post.comments.all %}
+        <p>{{ comment.content }} {{ comment.author }} {{ comment.created_at }}</p>
+    {% endfor %}
+
     {% if user.is_authenticated %}
         <form action="{% url "post:comment_new" post.id %}" method="POST">
             {% csrf_token %}
