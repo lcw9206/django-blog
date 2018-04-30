@@ -101,10 +101,7 @@ def comment_new(request, id):
             comment.post = post
             comment.save()
             messages.success(request, "댓글이 등록되었습니다.")
-            return render(request, 'post/post_detail.html', {
-                'post': post,
-                'comments': comment,
-            })
+            return redirect('post:post_detail', id)
         else:
             messages.error(request, "댓글 등록에 실패했습니다.")
 
