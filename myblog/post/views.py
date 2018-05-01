@@ -20,6 +20,20 @@ def post_list(request):
     })
 
 
+@login_required
+def my_post_list(request):
+    list_query = Post.objects.filter(user_id = request.user)
+    search = request.GET.get('search', '')
+
+    if search:
+        list_query = list_query.filter(title__icontains=search)
+
+    return render(request, 'post/post_list.html', {
+        'post_list': list_query,
+        'search': search,
+    })
+
+
 def post_detail(request, id):
     post = get_object_or_404(Post, id=id)
     comment_form = CommentForm()
@@ -106,3 +120,8 @@ def comment_new(request, id):
             messages.error(request, "댓글 등록에 실패했습니다.")
 
     return redirect('post:post_detail')
+
+
+@login_required
+def comment_delete(request, id):
+    pass
