@@ -38,4 +38,4 @@ class Profile(models.Model):
         return User.objects.get(pk=self.user)
 
     def __str__(self):
-        return self.user
+        return self.user.username
