@@ -18,34 +18,35 @@
 
     <p>{{ post.updated_at }}</p><hr/>
 
-
-    <table>
-        <thead>
-        <tr>
-            <th>내용</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for comment in post.comments.all %}
+    {% if post.comments.all %}
+        <table>
+            <thead>
             <tr>
-                <td>{{ comment.content }}</td>
-                <td>{{ comment.author }}</td>
-                <td>{{ comment.created_at }}</td>
-                <td>
-                {% if comment.author == user %}
-                    <form action="{% url "post:comment_delete" post.id comment.id %}" method="POST">
-                        {% csrf_token %}
-                        <input type="submit" value="삭제" onclick="return confirm('삭제하시겠습니까?')">
-                    </form>
-                {% endif %}
-                </td>
+                <th>내용</th>
+                <th>작성자</th>
+                <th>작성일</th>
+                <th></th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table><hr/>
+            </thead>
+            <tbody>
+            {% for comment in post.comments.all %}
+                <tr>
+                    <td>{{ comment.content }}</td>
+                    <td>{{ comment.author }}</td>
+                    <td>{{ comment.created_at }}</td>
+                    <td>
+                    {% if comment.author == user %}
+                        <form action="{% url "post:comment_delete" post.id comment.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="삭제" onclick="return confirm('삭제하시겠습니까?')">
+                        </form>
+                    {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table><hr/>
+    {% endif %}
 
     {% if user.is_authenticated %}
         <form action="{% url "post:comment_new" post.id %}" method="POST">
