@@ -1,7 +1,14 @@
 {% extends 'post/layout.html' %}
-
+{% load static %}
 {% block content %}
     <h1><p>{{ post.title }}</p></h1>
+
+    {% if post.user.profile.profile_thumbnail %}
+        <img src="{{ post.user.profile.profile_thumbnail.url }}"/>
+    {% else %}
+        <img src="{% static 'default.jpeg' %}"/>
+    {% endif %}
+
     <p>작성자 : {{ post.user }}</p><hr/>
     <p>{{ post.content }}</p>
 
