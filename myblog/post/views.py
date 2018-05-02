@@ -34,8 +34,8 @@ def my_post_list(request):
     })
 
 
-def post_detail(request, id):
-    post = get_object_or_404(Post, id=id)
+def post_detail(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
     comment_form = CommentForm()
 
     return render(request, 'post/post_detail.html', {
@@ -65,8 +65,8 @@ def post_new(request):
 
 
 @login_required
-def post_delete(request, id):
-    post = get_object_or_404(Post, id=id)
+def post_delete(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
 
     if request.user != post.user:
         messages.warning(request,'잘못된 접근입니다.')
@@ -80,8 +80,8 @@ def post_delete(request, id):
 
 
 @login_required
-def post_edit(request, id):
-    post = get_object_or_404(Post, id=id)
+def post_edit(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
 
     if request.user != post.user:
         messages.warning(request,'잘못된 접근입니다.')
@@ -92,7 +92,7 @@ def post_edit(request, id):
         if form.is_valid():
             form.save()
             messages.success(request, '글 수정에 성공했습니다.')
-            return redirect('post:post_detail')
+            return redirect('post:post_detail', post_id)
         else:
             messages.error(request, '글 수정에 실패했습니다.')
     else:
@@ -104,8 +104,8 @@ def post_edit(request, id):
 
 
 @login_required
-def comment_new(request, id):
-    post = get_object_or_404(Post, id=id)
+def comment_new(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
 
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -115,7 +115,7 @@ def comment_new(request, id):
             comment.post = post
             comment.save()
             messages.success(request, "댓글이 등록되었습니다.")
-            return redirect('post:post_detail', id)
+            return redirect('post:post_detail', post_id)
         else:
             messages.error(request, "댓글 등록에 실패했습니다.")
 
@@ -123,5 +123,16 @@ def comment_new(request, id):
 
 
 @login_required
-def comment_delete(request, id):
-    pass
+def comment_delete(request, post_id, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    if request.user != comment.author:
+        messages.warning(request,'잘못된 접근입니다.')
+        return redirect('post:post_detail')
+
+    if request.method == "POST":
+        comment.delete()
+        messages.success(request, '댓글 삭제가 완료되었습니다.')
+        return redirect('post:post_detail', post_id)
+
+    return redirect('post:post_detail')
