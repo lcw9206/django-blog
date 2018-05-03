@@ -37,10 +37,12 @@ def my_post_list(request):
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     comment_form = CommentForm()
+    category = Post.objects.filter(category_id=post.category_id).order_by('-created_at')[0:5]
 
     return render(request, 'post/post_detail.html', {
         'post': post,
         'comment_form': comment_form,
+        'category_list': category,
     })
 
 

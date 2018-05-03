@@ -20,15 +20,11 @@
 
     {% if post.comments.all %}
         <table>
-            <thead>
             <tr>
                 <th>내용</th>
                 <th>작성자</th>
                 <th>작성일</th>
-                <th></th>
             </tr>
-            </thead>
-            <tbody>
             {% for comment in post.comments.all %}
                 <tr>
                     <td>{{ comment.content }}</td>
@@ -44,7 +40,6 @@
                     </td>
                 </tr>
             {% endfor %}
-            </tbody>
         </table><hr/>
     {% endif %}
 
@@ -65,4 +60,18 @@
     {% endif %}
 
     <a href="{% url "post:post_list" %}">뒤로 가기</a>
+
+    {% if category_list %}
+        <table>
+            <tr>
+                <th>'{{ post.category }}' 카테고리의 다른 글</th>
+            </tr>
+            {% for post_list in category_list %}
+                <tr>
+                    <td><a href="{% url "post:post_detail" post_list.id %}">{{ post_list.title }}</a></td>
+                    <td>{{ post_list.created_at }}</td>
+                </tr>
+            {% endfor %}
+        </table><hr/>
+    {% endif %}
 {% endblock %}
