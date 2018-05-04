@@ -5,9 +5,15 @@
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
-        <p>{{ user }}</p>
-        <p>{{ form.about }}</p>
+        <p>아이디 : {{ user }}</p>
+        {% if post.user.profile.profile_thumbnail %}
+            <img src="{{ post.user.profile.profile_thumbnail.url }}" alt="프로필 사진"/>
+        {% else %}
+            <img src="{% static 'default.jpeg' %}" alt="프로필 사진" width="100px" height="100px"/>
+        {% endif %}
         <p>{{ form.profile_thumbnail }}</p>
+        <p>{{ form.about }}</p>
+
     </table>
     <input type="submit"/>
 </form>
