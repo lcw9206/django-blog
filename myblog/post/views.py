@@ -22,7 +22,7 @@ def post_list(request):
 
 @login_required
 def my_post_list(request):
-    list_query = Post.objects.filter(user_id = request.user)
+    list_query = Post.objects.filter(user_id=request.user)
     search = request.GET.get('search', '')
 
     if search:
@@ -71,7 +71,7 @@ def post_delete(request, post_id):
     post = get_object_or_404(Post, id=post_id)
 
     if request.user != post.user:
-        messages.warning(request,'잘못된 접근입니다.')
+        messages.warning(request, '잘못된 접근입니다.')
         return redirect('post:post_list')
 
     if request.method == "POST":
@@ -86,7 +86,7 @@ def post_edit(request, post_id):
     post = get_object_or_404(Post, id=post_id)
 
     if request.user != post.user:
-        messages.warning(request,'잘못된 접근입니다.')
+        messages.warning(request, '잘못된 접근입니다.')
         return redirect('post:post_list')
 
     if request.method == "POST":
@@ -121,7 +121,7 @@ def comment_new(request, post_id):
         else:
             messages.error(request, "댓글 등록에 실패했습니다.")
 
-    return redirect('post:post_detail')
+    return redirect('post:post_detail', post_id)
 
 
 @login_required
@@ -129,12 +129,12 @@ def comment_delete(request, post_id, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
 
     if request.user != comment.author:
-        messages.warning(request,'잘못된 접근입니다.')
-        return redirect('post:post_detail')
+        messages.warning(request, '잘못된 접근입니다.')
+        return redirect('post:post_list')
 
     if request.method == "POST":
         comment.delete()
         messages.success(request, '댓글 삭제가 완료되었습니다.')
         return redirect('post:post_detail', post_id)
 
-    return redirect('post:post_detail')
+    return redirect('post:post_detail', post_id)
