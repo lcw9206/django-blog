@@ -7,6 +7,7 @@ from . import views
 urlpatterns = [
     url(r'^post_list/$', views.post_list, name="post_list"),
     url(r'^my_post_list/$', views.my_post_list, name="my_post_list"),
+    url(r'^category_post_list/(?P<category_id>\d+)/$', views.category_post_list, name="category_post_list"),
     url(r'^(?P<post_id>\d+)/$', views.post_detail, name="post_detail"),
     url(r'^new/$', views.post_new, name="post_new"),
     url(r'^(?P<post_id>\d+)/delete/$', views.post_delete, name="post_delete"),

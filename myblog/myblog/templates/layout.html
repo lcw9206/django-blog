@@ -43,10 +43,26 @@
                 </div>
             </div>
         </nav>
+    <div class="container">
+        <div class="row row-offcanvas row-offcanvas">
+            {% block content %}
+            {% endblock %}
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+                <div class="list-group">
+                    <a href="{% url "post:post_list" %}" class="list-group-item active"><span class="badge">14</span> 전체글</a>
+                    <a href="{% url "post:my_post_list" %}" class="list-group-item">내 게시글</a>
+                    <a href="#" class="list-group-item disabled">카테고리</a>
+                    {% for category in category_list %}
+                        <a href="{% url "post:category_post_list" category.id %}" class="list-group-item">{{ category.name }}</a>
+                    {% endfor %}
+                </div>
+            </div><!--/.sidebar-offcanvas-->
+        </div><hr/>
 
-    {% block content %}
-    {% endblock %}
-
+        <footer>
+            <p>&copy; 2016 Company, Inc.</p>
+        </footer>
+    </div>
     <script src="{% static "js/bootstrap.min.js" %}">
     <!--Jquery-->
     <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
