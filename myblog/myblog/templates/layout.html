@@ -18,17 +18,14 @@
             <div class="container">
                 <div class="navbar-header">
                     {% if user.is_authenticated %}
+                        <div class="navbar-nav">
                         {% if user.profile.profile_thumbnail %}
-                            <div class="navbar-nav">
-                                <img src="{{ user.profile.profile_thumbnail.url }}" width="50" class="img-thumbnail"/>
-                            </div>
+                            <img src="{{ user.profile.profile_thumbnail.url }}" width="50" class="img-thumbnail"/>
                         {% else %}
-                            <div class="navbar-nav">
-                                <img src="{% static 'default.jpeg' %}" width="50" class="img-thumbnail"/>
-                            </div>
+                            <img src="{% static 'default.jpeg' %}" width="50" class="img-thumbnail"/>
                         {% endif %}
-
-                    <a class="navbar-brand" href="{% url "root" %}">{{ user }}님의 블로그</a>
+                        </div>
+                        <a class="navbar-brand" href="{% url "root" %}">{{ user }}님의 블로그</a>
                     {% else %}
                         <a class="navbar-brand" href="{% url "root" %}">연습용 블로그</a>
                     {% endif %}
