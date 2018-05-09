@@ -5,7 +5,6 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from imagekit.models import ProcessedImageField
 from imagekit.processors import Thumbnail
-from django.core.validators import ValidationError
 import datetime
 
 
@@ -46,7 +45,7 @@ class Post(models.Model):
     post_thumbnail = ProcessedImageField(
         verbose_name='사진',
         upload_to=set_post_path,
-        processors=[Thumbnail(200, 200)],
+        processors=[Thumbnail(262, 262)],
         format='JPEG',
         options={'quality': 60},
         blank=True

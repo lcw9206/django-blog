@@ -52,7 +52,7 @@
     {% endif %}
 
     {% if post.user == user %}
-        <a href="{% url "post:post_edit" post.id %}" method="POST">글 수정</a>
+        <a href="{% url "post:post_edit" post.id %}">글 수정</a>
         <form action="{% url "post:post_delete" post.id %}" method="POST">
             {% csrf_token %}
             <input type="submit" value="삭제" onclick="return confirm('삭제하시겠습니까?')">
