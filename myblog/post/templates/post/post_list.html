@@ -1,29 +1,49 @@
 {% extends 'post/layout.html' %}
 {% load static %}
 {% block content %}
-        <div class="col-xs-12 col-sm-9">
-            <p class="pull-right visible-xs">
-                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-            </p>
-            <div class="jumbotron">
-                <h1>백그라운드 이미지</h1>
-                <p>소개글</p>
-            </div>
-            <div class="row">
-                {% for post in post_list %}
-                    <div class="col-xs-6 col-lg-4">
-                        <a href="{% url "post:post_detail" post.id %}">
-                            {% if post.post_thumbnail %}
-                                <img src="{{ post.post_thumbnail.url }}"/>
-                            {% else %}
-                                <img src="{% static "images/default_post.jpg" %}"/>
-                            {% endif %}
+    <div class="col-xs-12 col-sm-9">
+        <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+        </p>
+        <div class="jumbotron">
+            <div class="pull-right">
+                <a href="{% url "post:post_new" %}" class="btn btn-default post_new">새글쓰기</a>
 
-                            <p><h5>{{ post.title }}</h5></p>
-                            <p><h5>{{ post.user }}님 | {{ post.created_at }}</h5></p>
-                        </a>
-                    </div>
-                {% endfor %}
-            </div><!--/row-->
-        </div><!--/.col-xs-12.col-sm-9-->
+                <form class="form-inline" method="GET">
+                    <input type="text" class="form-control" name="search" value="{{search}}" placeholder="검색"/>
+                    <button type="submit" class="glyphicon glyphicon-search"></button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            {% for post in post_list %}
+                <div class="col-xs-6 col-lg-4">
+                    <a href="{% url "post:post_detail" post.id %}">
+                        {% if post.post_thumbnail %}
+                            <img src="{{ post.post_thumbnail.url }}"/>
+                        {% else %}
+                            <img src="{% static "images/default_post.jpg" %}"/>
+                        {% endif %}
+                        <p><h5>{{ post.title }}</h5></p>
+                        <p><h5>{{ post.user }}님 | {{ post.created_at }}</h5></p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div><!--/row-->
+    </div><!--/.col-xs-12.col-sm-9-->
+{% endblock %}
+
+{% block sidebar %}
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+        <div class="list-group">
+            <a href="{% url "post:post_list" %}" class="list-group-item active"><span class="badge">16</span> 전체글</a>
+            {% if user.is_authenticated %}
+                <a href="{% url "post:my_post_list" %}" class="list-group-item"><span class="badge">{{count1}}</span>내 게시글</a>
+            {% endif %}
+            <a href="#" class="list-group-item disabled">카테고리</a>
+            {% for category in category_list %}
+                <a href="{% url "post:category_post_list" category.id %}" class="list-group-item">{{ category.name }}</a>
+            {% endfor %}
+        </div>
+    </div><!--/.sidebar-offcanvas-->
 {% endblock %}
