@@ -1,0 +1,32 @@
+.col-sm-9 {
+    border: 1px solid #ddd;
+}
+
+.title {
+    text-align: center;
+    margin: 0px;
+}
+
+.content {
+    min-height: 300px;
+}
+
+.post_thumbnail {
+    float: left;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.user_thumbnail {
+    float: right;
+    width: 70px;
+}
+
+.post_manage {
+    text-align: right;
+}
+
+.post_delete {
+    float: right;
+    margin-left: 6px;
+}
