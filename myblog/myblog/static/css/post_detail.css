@@ -2,13 +2,14 @@
     border: 1px solid #ddd;
 }
 
-.title {
+.detail-title {
     text-align: center;
-    margin: 0px;
+    margin-top: 20px;
 }
 
 .content {
     min-height: 300px;
+    padding: 5px;
 }
 
 .post_thumbnail {
@@ -24,9 +25,49 @@
 
 .post_manage {
     text-align: right;
+    padding: 5px;
 }
 
 .post_delete {
     float: right;
     margin-left: 6px;
+}
+
+.comment-form {
+    width: 600px;
+    height: 100px;
+}
+
+.comment-submit {
+    height: 100px;
+    margin-top: -90px;
+}
+
+.comment-input {
+    height: 150px;
+}
+
+.comment-thumbnail {
+    display: inline-block;
+    width: 100px;
+    padding: 4px;
+    margin-top: -90px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.category-table {
+    border: 1px solid #ddd;
+}
+
+.title {
+    font-size: 28px;
+}
+
+.back-site {
+    float: right;
+    font-size: 16px;
+    margin-top: 8px;
 }
