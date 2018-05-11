@@ -7,16 +7,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
-def post_list(request):
-    list_query = Post.objects.all()
+def post_list(request, list_queryset=None):
+    if list_queryset is None:
+        list_queryset = Post.objects.all().order_by('-created_at')
+
     category_list = Category.objects.all()
     search = request.GET.get('search', '')
-
     if search:
-        list_query = list_query.filter(title__icontains=search)
+        list_queryset = list_queryset.filter(title__icontains=search)
 
     return render(request, 'post/post_list.html', {
-        'post_list': list_query,
+        'post_list': list_queryset,
         'category_list': category_list,
         'search': search,
     })
@@ -24,44 +25,24 @@ def post_list(request):
 
 @login_required
 def my_post_list(request):
-    list_query = Post.objects.filter(user_id=request.user)
-    category_list = Category.objects.all()
-    search = request.GET.get('search', '')
-
-    if search:
-        list_query = list_query.filter(title__icontains=search)
-
-    return render(request, 'post/post_list.html', {
-        'post_list': list_query,
-        'category_list': category_list,
-        'search': search,
-    })
+    return post_list(request, Post.objects.filter(user_id=request.user))
 
 
 def category_post_list(request, category_id):
-    list_query = Post.objects.filter(category_id=category_id)
-    category_list = Category.objects.all()
-    search = request.GET.get('search', '')
-
-    if search:
-        list_query = list_query.filter(title__icontains=search)
-
-    return render(request, 'post/post_list.html', {
-        'post_list': list_query,
-        'category_list': category_list,
-        'search': search,
-    })
+    return post_list(request, Post.objects.filter(category_id=category_id))
 
 
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     comment_form = CommentForm()
-    category = Post.objects.filter(category_id=post.category_id).order_by('-created_at')[0:5]
+    recent_category = Post.objects.filter(category_id=post.category_id).order_by('-created_at')[0:5]
+    category_list = Category.objects.all()
 
     return render(request, 'post/post_detail.html', {
         'post': post,
         'comment_form': comment_form,
-        'category_list': category,
+        'category': recent_category,
+        'category_list': category_list,
     })
 
 
