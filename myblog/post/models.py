@@ -50,7 +50,7 @@ class Post(models.Model):
         options={'quality': 60},
         blank=True
     )
-    title = models.CharField(max_length=100, verbose_name='제목')
+    title = models.CharField(max_length=40, verbose_name='제목')
     content = models.CharField(max_length=150, verbose_name='내용')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='생성일자')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='수정일자')
