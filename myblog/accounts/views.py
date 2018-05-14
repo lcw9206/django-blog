@@ -2,7 +2,9 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignupForm, ProfileForm
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from .models import Profile
 from django.contrib import messages
 
@@ -23,12 +25,12 @@ def signup(request):
     })
 
 
-@login_required()
+@login_required
 def profile(request):
     return render(request, 'accounts/profile.html')
 
 
-@login_required()
+@login_required
 def profile_change(request):
     profile = get_object_or_404(Profile, pk=request.user.profile.id)
     if request.method == 'POST':
@@ -42,5 +44,25 @@ def profile_change(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'accounts/profile_change.html', {
+        'form': form
+    })
+
+
+@login_required
+def password_change(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, '비밀번호 변경이 완료되었습니다.')
+            return render(request, 'accounts/profile.html', {
+                'form': form
+            })
+        else:
+            messages.error(request, '비밀번호 변경에 실패했습니다.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/password_change.html', {
         'form': form
     })

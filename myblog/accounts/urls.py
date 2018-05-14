@@ -17,8 +17,7 @@ urlpatterns = [
     url(r'^profile/$', views.profile, name='profile'),
     url(r'^profile_change/$', views.profile_change, name='profile_change'),
 
-    url(r'^password_change/$', auth_views.password_change, name='password_change',
-        kwargs={'template_name': 'accounts/password_change.html'}),
+    url(r'^password_change/$', views.password_change, name='password_change'),
     url(r'^password_change/done/$', auth_views.password_change_done, name='password_change_done',
         kwargs={'template_name': 'accounts/password_change_done.html'}),
 ]
