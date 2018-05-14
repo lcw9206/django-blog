@@ -5,3 +5,22 @@
 .navbar-brand {
     padding: 15px 20px 20px 20px;
 }
+
+.nav-thumbnail {
+    display: inline-block;
+    width: 50px;
+    padding: 4px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.footer-box {
+    position: relative;
+    padding-left: 150px;
+}
+
+.page-wrap {
+    min-height: 600px;
+}

@@ -5,9 +5,13 @@ from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
-    content = forms.CharField(widget=forms.Textarea(attrs={
-        'placeholder': '150자 이내로 작성해주세요'
-    }))
+    content = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                    'placeholder': '글의 내용을 입력해주세요. \n최대 150자까지 입력이 가능합니다.'
+            }
+        )
+    )
 
     class Meta:
         model = Post
@@ -27,10 +31,14 @@ class PostForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    content = forms.CharField(widget=forms.Textarea(attrs={
-        'placeholder': '댓글을 입력해주세요.',
-        'class': 'comment-form',
-    }))
+    content = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                    'placeholder': '댓글을 입력해주세요.',
+                    'class': 'comment-form',
+            }
+        )
+    )
 
     class Meta:
         model = Comment
