@@ -7,8 +7,9 @@
         </p>
         <div class="jumbotron">
             <div class="pull-right">
-                <a href="{% url "post:post_new" %}" class="btn btn-default post_new">새글쓰기</a>
-
+                {% if user.is_authenticated %}
+                    <a href="{% url "post:post_new" %}" class="btn btn-default post_new">새글쓰기</a>
+                {% endif %}
                 <form class="form-inline" method="GET">
                     <input type="text" class="form-control" name="search" value="{{search}}" placeholder="검색"/>
                     <button type="submit" class="glyphicon glyphicon-search"></button>
@@ -24,7 +25,9 @@
                         {% else %}
                             <img src="{% static "images/default_post.jpg" %}"/>
                         {% endif %}
-                        <p><h5>{{ post.title }}</h5></p>
+                        <div class="list-title">
+                            <p><h5>{{ post.title }}</h5></p>
+                        </div>
                         <p><h5>{{ post.user }}님 | {{ post.created_at }}</h5></p>
                     </a>
                 </div>
