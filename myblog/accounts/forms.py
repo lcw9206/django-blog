@@ -32,10 +32,16 @@ class SignupForm(UserCreationForm):
 
 
 class ProfileForm(forms.ModelForm):
-    about = forms.CharField(label='자기소개', required=False, widget=forms.Textarea(attrs={
-            'row': 50,
-            'placeholder': '100자 이하로 등록해주세요'
-    }))
+    about = forms.CharField(
+        label='자기소개',
+        required=False,
+        widget=forms.Textarea(
+            attrs={
+                    'row': 50,
+                    'placeholder': '100자 이하로 등록해주세요'
+            }
+        )
+    )
 
     class Meta:
         model = Profile

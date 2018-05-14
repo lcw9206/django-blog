@@ -1,0 +1,248 @@
+.profile-layout {
+    width: 400px;
+    min-height: 500px;
+    margin-left: 30%;
+    margin-top: 50px;
+    border: 1px solid #ddd;
+}
+
+.profile-change-layout {
+    max-width: 450px;
+    height: 550px;
+    border: 1px solid #ddd;
+    margin-left: 28%;
+    margin-top: 50px;
+}
+
+.password-change-layout {
+    width: 400px;
+    min-height: 430px;
+    margin-left: 33%;
+    border: 1px solid #ddd;
+}
+
+.profile-form {
+    height: 600px;
+}
+
+.profile-thumbnail {
+    margin: 15px 0px 15px 0px;
+    text-align: center;
+}
+
+.profile-text, .profile-change-text, .password-change-text {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.profile-wrap {
+    height: 40px;
+}
+
+.profile-box {
+    padding-left: 60px;
+    font-size: 16px;
+}
+
+.profile-intro-box {
+    padding-left: 64px;
+}
+
+.user-inform-2 {
+    padding-left: 30px;
+    font-size: 17px;
+}
+
+.user-inform-3 {
+    text-align: left;
+    padding-left: 30px;
+}
+
+.user-inform-4 {
+    text-align: left;
+    padding-left: 17px;
+}
+
+.user-inform-5 {
+    float: right;
+    padding-right: 50px;
+}
+
+.user-intro {
+    border: 1px solid #ddd;
+    width: 270px;
+    min-height: 80px;
+}
+
+.profile-btn-list {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.profile-change-wrap {
+    height: 50px;
+    padding: 20px;
+    padding-left: 90px;
+    text-align: left;
+    font-size: 15px;
+}
+
+.password-change-wrap {
+    height: 50px;
+    padding: 20px 0px 0px 50px;
+    text-align: left;
+    font-size: 15px;
+}
+
+.profile-change-thumbnail-wrap {
+    padding-top:10px
+}
+
+.change-thumbnail {
+    text-align: center;
+}
+
+#id_profile_thumbnail {
+    padding-left: 30%;
+}
+
+.profile-change-intro-wrap {
+    padding: 20px 50px 20px 20px;
+    text-align: left;
+    font-size: 15px;
+}
+
+.profile-change-content {
+    padding-left: 8%;
+}
+
+.post-form-input-wrap {
+    height: 250px;
+    padding: 20px 50px 20px 20px;
+    text-align: left;
+    font-size: 15px;
+}
+
+label[for=id-profile-username] {
+    font-size: 17px;
+}
+
+label[for=id-profile-email] {
+    font-size: 17px;
+}
+
+label[for=id-old-password] {
+    font-size: 16px;
+}
+
+label[for=id-new-password] {
+    font-size: 16px;
+}
+
+label[for=id-new-password-confirm] {
+    font-size: 16px;
+}
+
+label[for=id-profile-intro] {
+    margin-left: 42%;
+    font-size: 17px;
+}
+
+label[for=id-profile-change-thumbnail] {
+    text-align: center;
+    font-size: 17px;
+    width: 448px;
+}
+
+#id_about {
+    height: 100px;
+}
+
+.profile-change-btn {
+    text-align: center;
+}
+
+.password-change-btn {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.password-help-text {
+    height: 100px;
+    padding: 20px 0px 0px 30px;
+    margin-bottom: 10px;
+    color: #9d9d9d;
+}
+
+#id_password {
+    float: right;
+    margin-right: 20px;
+}
+
+.login-btn {
+    margin: 20px 10px 10px 41%;
+}
+
+label[for=id-login-username] {
+    margin-left: 11%;
+    font-size: 17px;
+}
+
+label[for=id-password] {
+    margin-left: 11%;
+    font-size: 17px;
+}
+
+.signup-layout, .login-layout {
+    max-width: 350px;
+    border: 1px solid #ddd;
+    margin-left: 33%;
+    margin-top: 50px;
+}
+
+.signup-row, .login-row, .post-form-row, .profile-row {
+    min-height: 600px;
+}
+
+.signup-wrap, .login-wrap {
+    height: 50px;
+    padding: 20px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.signup-form, .post_form {
+    height: 400px;
+}
+
+.signup-box, .login-box {
+    width: 100%;
+    padding-right: 10px;
+}
+
+.signup-text, .login-text, .post-form-text {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.signup-btn {
+    height: 100px;
+}
+
+.complete-btn {
+    margin: 50px 0px 0px 38%;
+}
+
+#id_username, #id_email, #id_password1, #id_password2 {
+    float: right;
+    margin-right: 20px;
+}
+
+label[for=id-profile-thumbnail] {
+    margin-left: 40%;
+    padding-top: -5px;
+}
+
+#id_profile_thumbnail {
+    margin-bottom: 20px;
+}
