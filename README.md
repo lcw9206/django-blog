@@ -10,3 +10,5 @@
 
 ## 참고 사이트
 1. [hannal님의 블로그](http://blog.hannal.com)
+2. [askdjango](https://nomade.kr)
+
