@@ -5,31 +5,51 @@ from .models import Post, Comment, Category
 from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
-def post_list(request, list_queryset=None):
+def post_list(request, list_queryset=None, kind=None):
+    category_list = Category.objects.all()
+    search = request.GET.get('search', '')
+
     if list_queryset is None:
         list_queryset = Post.objects.all().order_by('-created_at')
 
-    category_list = Category.objects.all()
-    search = request.GET.get('search', '')
     if search:
         list_queryset = list_queryset.filter(title__icontains=search)
 
+    paginator = Paginator(list_queryset, 6)
+    page = request.POST.get('page')
+
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+    if request.is_ajax():  # Ajax request 여부 확인
+        return render(request, 'post/post_list_ajax.html', {
+            'post_list': posts,
+            'search': search,
+            'kind': kind
+        })
+
     return render(request, 'post/post_list.html', {
-        'post_list': list_queryset,
+        'post_list': posts,
         'category_list': category_list,
         'search': search,
+        'kind': kind
     })
 
 
 @login_required
 def my_post_list(request):
-    return post_list(request, Post.objects.filter(user_id=request.user))
+    return post_list(request, Post.objects.filter(user_id=request.user), kind='my')
 
 
 def category_post_list(request, category_id):
-    return post_list(request, Post.objects.filter(category_id=category_id))
+    return post_list(request, Post.objects.filter(category_id=category_id), kind=category_id)
 
 
 def post_detail(request, post_id):

@@ -1,10 +1,8 @@
 {% extends 'post/layout.html' %}
 {% load static %}
+
 {% block content %}
     <div class="col-xs-12 col-sm-9">
-        <p class="pull-right visible-xs">
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-        </p>
         <div class="jumbotron">
             <div class="pull-right">
                 {% if user.is_authenticated %}
@@ -18,20 +16,22 @@
         </div>
         <div class="row">
             {% for post in post_list %}
-                <div class="col-xs-6 col-lg-4">
-                    <a href="{% url "post:post_detail" post.id %}">
-                        {% if post.post_thumbnail %}
-                            <img src="{{ post.post_thumbnail.url }}"/>
-                        {% else %}
-                            <img src="{% static "images/default_post.jpg" %}"/>
-                        {% endif %}
-                        <div class="list-title">
-                            <p><h5>{{ post.title }}</h5></p>
-                        </div>
-                        <p><h5>{{ post.user }}님 | {{ post.created_at }}</h5></p>
-                    </a>
-                </div>
+            <div class="col-xs-6 col-lg-4">
+                <a href="{% url "post:post_detail" post.id %}">
+                    {% if post.post_thumbnail %}
+                        <img src="{{ post.post_thumbnail.url }}"/>
+                    {% else %}
+                        <img src="{% static "images/default_post.jpg" %}"/>
+                    {% endif %}
+                    <div class="list-title">
+                        <p><h5>{{ post.title }}</h5></p>
+                    </div>
+                    <p><h5>{{ post.user }}님 | {{ post.created_at }}</h5></p>
+                </a>
+            </div>
             {% endfor %}
+            <div id="post_list_ajax"></div>
+            <input id="page" type="hidden" value="2">
         </div><!--/row-->
     </div><!--/.col-xs-12.col-sm-9-->
 {% endblock %}
@@ -49,4 +49,50 @@
             {% endfor %}
         </div>
     </div><!--/.sidebar-offcanvas-->
+{% endblock %}
+
+{% block extra_body %}
+    <script>
+        $(window).scroll(function(){
+            var diff = $(document).height() - $(window).height();
+            var page = $("#page").val();
+            var end_page = {{ post_list.paginator.num_pages }};
+
+            console.log("page:",page,"end_page:",end_page);
+
+            if(page > end_page){
+                return ;
+            }
+
+            if($(window).scrollTop() == diff){
+                callMorePostAjax(page);
+                $("#page").val(parseInt(page) + 1);
+            }
+        });
+
+        function callMorePostAjax(page){
+            $.ajax({
+                type: 'POST',
+
+                {% if kind = 'my' %}
+                    url: "{% url 'post:my_post_list' %}",
+                {% elif kind = None %}
+                    url: "{% url 'post:post_list' %}",
+                {% elif kind = category_id %}
+                    url: "{% url 'post:category_post_list' category_id=kind %}",
+                {% endif %}
+
+                data: {
+                    'page': page,
+                    'csrfmiddlewaretoken': '{{csrf_token}}'
+                },
+                success: addMorePostAjax,
+                dataType: 'html'
+            });
+        }
+
+        function addMorePostAjax(data, textStatus, jqXHR){
+                $('#post_list_ajax').append(data);
+        }
+    </script>
 {% endblock %}

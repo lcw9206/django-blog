@@ -1,0 +1,17 @@
+{% load static %}
+
+{% for post in post_list %}
+    <div class="col-xs-6 col-lg-4">
+        <a href="{% url 'post:post_detail' post.id %}">
+            {% if post.post_thumbnail %}
+                <img src="{{ post.post_thumbnail.url }}"/>
+            {% else %}
+                <img src="{% static 'images/default_post.jpg' %}"/>
+            {% endif %}
+            <div class="list-title">
+                <p><h5>{{ post.title }}</h5></p>
+            </div>
+            <p><h5>{{ post.user }}님 | {{ post.created_at }}</h5></p>
+        </a>
+    </div>
+{% endfor %}
