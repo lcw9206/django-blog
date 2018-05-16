@@ -55,7 +55,7 @@ def category_post_list(request, category_id):
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     comment_form = CommentForm()
-    recent_category = Post.objects.filter(category_id=post.category_id).order_by('-created_at')[0:5]
+    recent_category = Post.objects.filter(id__lt=post_id)[:5]
     category_list = Category.objects.all()
 
     return render(request, 'post/post_detail.html', {
