@@ -58,6 +58,13 @@ def post_detail(request, post_id):
     recent_category = Post.objects.filter(id__lt=post_id)[:5]
     category_list = Category.objects.all()
 
+    if request.is_ajax():  # Ajax request 여부 확인
+
+        return render(request, 'post/comment_list_ajax.html', {
+            'comment_form': comment_form,
+            'post': post
+        })
+
     return render(request, 'post/post_detail.html', {
         'post': post,
         'comment_form': comment_form,

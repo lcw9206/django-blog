@@ -5,7 +5,7 @@
     <div class="col-sm-9">
         <div class="detail-title">
             <span class="title">{{ post.title }}</span>
-            <a href="{% url "post:post_list" %}" class="back-site">뒤로가기</a>
+            <a href="{% url 'post:post_list' %}" class="back-site">뒤로가기</a>
         </div><hr/>
         <div class="content">
             <span class="picture">
@@ -22,8 +22,8 @@
             <p>작성자 : {{ post.user }}</p>
 
             {% if post.user == user %}
-                <a href="{% url "post:post_edit" post.id %}" class="btn btn-default">수정</a>
-                <form action="{% url "post:post_delete" post.id %}" method="POST" class="post_delete">
+                <a href="{% url 'post:post_edit' post.id %}" class="btn btn-default">수정</a>
+                <form action="{% url 'post:post_delete' post.id %}" method="POST" class="post_delete">
                     {% csrf_token %}
                 <button type="submit" class="btn btn-default" onclick="return confirm('삭제하시겠습니까?')">삭제</button>
                 </form>
@@ -31,49 +31,63 @@
         </div><hr/>
 
         {% if user.is_authenticated %}
-            <form action="{% url "post:comment_new" post.id %}" method="POST" class="comment-input">
+            <form action="{% url 'post:comment_new' post.id %}" method="POST" class="comment-input">
                 {% csrf_token %}
-                <img src="{{ user.profile.profile_thumbnail.url }}" class="comment-thumbnail"/>
+
+                {% if user.profile.profile_thumbnail %}
+                    <img src="{{ user.profile.profile_thumbnail.url }}" class="comment-thumbnail"/>
+                {% else %}
+                    <img src="{% static 'images/default.jpeg' %}" class="comment-thumbnail"/>
+                {% endif %}
+
                 {{ comment_form.content }}
                 <input type="submit" value="등록" class="btn btn-default comment-submit">
             </form>
         {% endif %}
 
         {% if post.comments.all %}
-            <table class="table table-hover">
-                <tr>
-                    <th>작성자</th>
-                    <th>내용</th>
-                    <th>작성일</th>
-                    <th></th>
-                </tr>
-                {% for comment in post.comments.all %}
-                    <tr>
-                        <td>{{ comment.author }}</td>
-                        <td>{{ comment.content }}</td>
-                        <td>{{ comment.created_at }}</td>
-                        <td>
-                        {% if comment.author == user %}
-                            <form action="{% url "post:comment_delete" post.id comment.id %}" method="POST">
-                                {% csrf_token %}
-                                <input type="submit" value="삭제" class="btn btn-default" onclick="return confirm('삭제하시겠습니까?')">
-                            </form>
-                        {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
+            <div class="divTable">
+                <div class="divTableBody">
+                    <div class="divTableRowHeader">
+                        <div class="divTableCell">작성자</div>
+                        <div class="divTableCell">내용</div>
+                        <div class="divTableCell">작성일</div>
+                        <div class="divTableCell">&nbsp;</div>
+                    </div>
+                    {% for comment in post.comments.all|slice:":3" %}
+                        <div class="divTableRow">
+                            <div class="divTableCell">{{ comment.author }}</div>
+                            <div class="divTableCell">{{ comment.content }}</div>
+                            <div class="divTableCell">{{ comment.created_at }}</div>
+                            {% if comment.author == user %}
+                                <div class="divTableCell">
+                                    <form action="{% url 'post:comment_delete' post.id comment.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="submit" class="btn btn-default comment-delete" value="삭제" onclick="return confirm('삭제하시겠습니까?')"></input>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div id="load-comment" class="divTableBody"></div>
+            </div>
+            {% if post.comments.all.count > 3 %}
+                <a id="load-more-btn" value="{{ post.id }}" class="btn btn-default">댓글 더보기</a>
+            {% endif %}
         {% endif %}
 
         {% if category %}
             <table class="table table-hover category-table">
                 <tr>
                     <th>'{{ post.category }}' 카테고리의 다른 글</th>
+                    <th>&nbsp;&nbsp;&nbsp;</th>
                     <th></th>
                 </tr>
                 {% for post_list in category %}
                     <tr>
-                        <td><a href="{% url "post:post_detail" post_list.id %}">{{ post_list.title }}</a></td>
+                        <td><a href="{% url 'post:post_detail' post_list.id %}">{{ post_list.title }}</a></td>
+                        <td></td>
                         <td>{{ post_list.created_at }}</td>
                     </tr>
                 {% endfor %}
@@ -85,14 +99,37 @@
 {% block sidebar %}
     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
         <div class="list-group">
-            <a href="{% url "post:post_list" %}" class="list-group-item active"><span class="badge">{{count}}</span> 전체글</a>
+            <a href="{% url 'post:post_list' %}" class="list-group-item active"><span class="badge">{{count}}</span> 전체글</a>
             {% if user.is_authenticated %}
-                <a href="{% url "post:my_post_list" %}" class="list-group-item"><span class="badge">{{count1}}</span>내 게시글</a>
+                <a href="{% url 'post:my_post_list' %}" class="list-group-item"><span class="badge">{{count1}}</span>내 게시글</a>
             {% endif %}
             <a href="#" class="list-group-item disabled">카테고리</a>
             {% for category in category_list %}
-                <a href="{% url "post:category_post_list" category.id %}" class="list-group-item">{{ category.name }}</a>
+                <a href="{% url 'post:category_post_list' category.id %}" class="list-group-item">{{ category.name }}</a>
             {% endfor %}
         </div>
     </div><!--/.sidebar-offcanvas-->
+{% endblock %}
+
+{% block extra_body %}
+    <script>
+        $('#load-more-btn').click(function(){
+            var post_id = $(this).attr('value');
+            $('#load-more-btn').hide();
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'post:post_detail' post.id %}",
+                data: {
+                    'post_id': post_id,
+                    'csrfmiddlewaretoken': '{{csrf_token}}'
+                },
+
+                success: function(data, textStatus, jqXHR){
+                    $('#load-comment').append(data);
+                },
+                dataType: 'html'
+            });
+        });
+    </script>
 {% endblock %}

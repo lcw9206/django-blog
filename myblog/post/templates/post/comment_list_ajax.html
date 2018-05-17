@@ -1,0 +1,15 @@
+{% for comment in post.comments.all|slice:"3:" %}
+    <div class="divTableRow">
+        <div class="divTableCell">{{ comment.author }}</div>
+        <div class="divTableCell">{{ comment.content }}</div>
+        <div class="divTableCell">{{ comment.created_at }}</div>
+        <div class="divTableCell">
+            {% if comment.author == user %}
+                <form action="{% url 'post:comment_delete' post.id comment.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-default comment-delete" value="삭제" onclick="return confirm('삭제하시겠습니까?')"></input>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
