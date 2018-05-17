@@ -171,7 +171,7 @@ label[for=id-post-thumbnail] {
     margin: 5px;
 }
 
-.comment-delete {
+.comment-delete, .ajax-post-confirm {
     text-decoration: none !important;
 }
 
