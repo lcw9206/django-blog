@@ -227,3 +227,7 @@ label[for=id-post-thumbnail] {
 .divTableBody {
 	display: table-row-group;
 }
+
+#ajax-comment-add-list {
+    display: none;
+}

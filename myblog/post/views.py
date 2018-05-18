@@ -30,9 +30,7 @@ def post_list(request, list_queryset=None, kind=None):
 
     if request.is_ajax():  # Ajax request 여부 확인
         return render(request, 'post/post_list_ajax.html', {
-            'post_list': posts,
-            'search': search,
-            'kind': kind
+            'post_list': posts
         })
 
     return render(request, 'post/post_list.html', {
@@ -59,7 +57,6 @@ def post_detail(request, post_id):
     category_list = Category.objects.all()
 
     if request.is_ajax():  # Ajax request 여부 확인
-
         return render(request, 'post/comment_list_ajax.html', {
             'comment_form': comment_form,
             'post': post
@@ -69,7 +66,7 @@ def post_detail(request, post_id):
         'post': post,
         'comment_form': comment_form,
         'category': recent_category,
-        'category_list': category_list,
+        'category_list': category_list
     })
 
 
