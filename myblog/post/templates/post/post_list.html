@@ -6,7 +6,7 @@
         <div class="jumbotron">
             <div class="pull-right">
                 {% if user.is_authenticated %}
-                    <a href="{% url "post:post_new" %}" class="btn btn-default post_new">새글쓰기</a>
+                    <a href="{% url 'post:post_new' %}" class="btn btn-default post_new">새글쓰기</a>
                 {% endif %}
                 <form class="form-inline" method="GET">
                     <input type="text" class="form-control" name="search" value="{{search}}" placeholder="검색"/>
@@ -17,11 +17,11 @@
         <div class="row">
             {% for post in post_list %}
             <div class="col-xs-6 col-lg-4">
-                <a href="{% url "post:post_detail" post.id %}">
+                <a href="{% url 'post:post_detail' post.id %}">
                     {% if post.post_thumbnail %}
                         <img src="{{ post.post_thumbnail.url }}"/>
                     {% else %}
-                        <img src="{% static "images/default_post.jpg" %}"/>
+                        <img src="{% static 'images/default_post.jpg' %}"/>
                     {% endif %}
                     <div class="list-title">
                         <p><h5>{{ post.title }}</h5></p>
@@ -34,62 +34,21 @@
             <input id="page" type="hidden" value="2">
         </div><!--/row-->
     </div><!--/.col-xs-12.col-sm-9-->
+    {% include 'post/base_script.html' %}
 {% endblock %}
 
 {% block sidebar %}
     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
         <div class="list-group">
-            <a href="{% url "post:post_list" %}" class="list-group-item">전체글</a>
+            <a href="{% url 'post:post_list' %}" class="list-group-item">전체글</a>
             {% if user.is_authenticated %}
-                <a href="{% url "post:my_post_list" %}" class="list-group-item">내 게시글</a>
+                <a href="{% url 'post:my_post_list' %}" class="list-group-item">내 게시글</a>
             {% endif %}
             <a href="#" class="list-group-item disabled">카테고리</a>
             {% for category in category_list %}
-                <a href="{% url "post:category_post_list" category.id %}" class="list-group-item">{{ category.name }}</a>
+                <a href="{% url 'post:category_post_list' category.id %}" class="list-group-item">{{ category.name }}</a>
             {% endfor %}
         </div>
     </div><!--/.sidebar-offcanvas-->
 {% endblock %}
 
-{% block extra_body %}
-    <script>
-        $(window).scroll(function(){
-            var diff = $(document).height() - $(window).height();
-            var page = $("#page").val();
-            var end_page = {{ post_list.paginator.num_pages }};
-
-            if(page > end_page){
-                return ;
-            }
-
-            if($(window).scrollTop() == diff){
-                callMorePostAjax(page);
-                $("#page").val(parseInt(page) + 1);
-            }
-        });
-
-        function callMorePostAjax(page){
-            $.ajax({
-                type: 'POST',
-
-                {% if kind = 'my' %}
-                    url: "{% url 'post:my_post_list' %}",
-                {% elif kind = None %}
-                    url: "{% url 'post:post_list' %}",
-                {% elif kind = category_id %}
-                    url: "{% url 'post:category_post_list' category_id=kind %}",
-                {% endif %}
-
-                data: {
-                    'page': page,
-                },
-                success: addMorePostAjax,
-                dataType: 'html'
-            });
-        }
-
-        function addMorePostAjax(data, textStatus, jqXHR){
-                $('#post_list_ajax').append(data);
-        }
-    </script>
-{% endblock %}

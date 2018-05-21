@@ -78,6 +78,7 @@
             </div>
             <div class="divTableBody" id="load-comment"></div>
         </div>
+
         {% if post.comments.all.count > 3 %}
             <a id="load-more-btn" value="{{ post.id }}" class="btn btn-default">댓글 더보기</a>
         {% endif %}
@@ -99,7 +100,7 @@
             </table>
         {% endif %}
     </div>
-    {% include "post/script.html" %}
+    {% include "post/detail_script.html" %}
 {% endblock %}
 
 {% block sidebar %}

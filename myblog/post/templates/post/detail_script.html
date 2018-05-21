@@ -17,6 +17,9 @@
 
                 success: function(data, textStatus, jqXHR) {
                     $('#load-comment').append(data);
+                },
+                error: function(request, status, error) {
+                    alert('댓글 더보기에 문제가 발생했습니다.');
                 }
             });
         });
@@ -33,16 +36,18 @@
                 type: 'POST',
                 url: "{% url 'post:comment_new' post.id %}",
                 data: {
-                    'id': post_id,
                     'content': content
                 },
+                dataType: "html",
 
                 success: function(data, textStatus, jqXHR) {
-                    alert('abdd');
+                    alert('댓글이 등록되었습니다.');
                     $('#comment-ajax-'+ post_id ).append(data);
                     $('#id_content').val("");
                 },
-                dataType: "html",
+                error: function(request, status, error) {
+                    alert('댓글 등록에 문제가 발생했습니다.');
+                }
             });
         });
     });
@@ -61,13 +66,10 @@
                 $.post(url)
                     .done(function() {
                         $('#' + target_id).remove();
-                        if($('#'+ target_id).val()){
-                            $('divtable').hide();
-                        }
                         }
                     )
                     .fail(function(xhr, textStatus, error) {
-                        alert('failed:' + error);
+                        alert('댓글 삭제에 문제가 발생했습니다.');
                     })
             }
         });
