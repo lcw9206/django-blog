@@ -54,7 +54,7 @@
             </div>
             <div class="divTableBody" id="comment-ajax-{{ post.id }}"></div>
             <div class="divTableBody">
-                {% if post.comments.all %}
+                {% if post.comments %}
                     {% for comment in post.comments.all|slice:":3" %}
                         <div class="divTableRow" id="comment-{{ comment.id }}">
                             <div class="divTableCell">{{ comment.author }}</div>
@@ -83,22 +83,20 @@
             <a id="load-more-btn" value="{{ post.id }}" class="btn btn-default">댓글 더보기</a>
         {% endif %}
 
-        {% if category %}
-            <table class="table table-hover category-table">
+        <table class="table table-hover category-table">
+            <tr>
+                <th>'{{ post.category }}' 카테고리의 다른 글</th>
+                <th>&nbsp;&nbsp;&nbsp;</th>
+                <th></th>
+            </tr>
+            {% for post_list in category %}
                 <tr>
-                    <th>'{{ post.category }}' 카테고리의 다른 글</th>
-                    <th>&nbsp;&nbsp;&nbsp;</th>
-                    <th></th>
+                    <td><a href="{% url 'post:post_detail' post_list.id %}">{{ post_list.title }}</a></td>
+                    <td></td>
+                    <td>{{ post_list.created_at }}</td>
                 </tr>
-                {% for post_list in category %}
-                    <tr>
-                        <td><a href="{% url 'post:post_detail' post_list.id %}">{{ post_list.title }}</a></td>
-                        <td></td>
-                        <td>{{ post_list.created_at }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        {% endif %}
+            {% endfor %}
+        </table>
     </div>
     {% include "post/detail_script.html" %}
 {% endblock %}

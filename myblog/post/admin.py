@@ -10,6 +10,7 @@ class PostAdmin(admin.ModelAdmin):
     list_per_page = 5
     list_editable = ('category', )
     search_fields = ('user', )
+    list_select_related = ['user', 'category']
 
 
 @admin.register(Category)
@@ -28,3 +29,4 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('author', 'post', 'content', 'created_at', 'updated_at', )
     list_per_page = 10
     search_fields = ('author', )
+    list_select_related = ['post', 'author']

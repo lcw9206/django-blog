@@ -13,7 +13,7 @@ def post_list(request, list_queryset=None, kind=None):
     search = request.GET.get('search', '')
 
     if list_queryset is None:
-        list_queryset = Post.objects.all().order_by('-created_at')
+        list_queryset = Post.objects.all().order_by('-created_at').select_related('user')
 
     if search:
         list_queryset = list_queryset.filter(title__icontains=search)
@@ -43,11 +43,11 @@ def post_list(request, list_queryset=None, kind=None):
 
 @login_required
 def my_post_list(request):
-    return post_list(request, Post.objects.filter(user_id=request.user), kind='my')
+    return post_list(request, Post.objects.filter(user_id=request.user).select_related('user'), kind='my')
 
 
 def category_post_list(request, category_id):
-    return post_list(request, Post.objects.filter(category_id=category_id), kind=category_id)
+    return post_list(request, Post.objects.filter(category_id=category_id).select_related('user'), kind=category_id)
 
 
 def post_detail(request, post_id):
