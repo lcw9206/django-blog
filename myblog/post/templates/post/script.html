@@ -1,0 +1,59 @@
+<script>
+    //////////// 댓글 더보기 ////////////
+
+    $(function(){
+        $(document).on('click', '#load-more-btn', function(e) {
+            e.preventDefault();
+
+            var post_id = $(this).attr('value');
+            $('#load-more-btn').hide();
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'post:post_detail' post.id %}",
+                data: {
+                    'post_id': post_id
+                },
+
+                success: function(data, textStatus, jqXHR) {
+                    $('#load-comment').append(data);
+                }
+            });
+        });
+    });
+
+    //////////// 댓글 등록 ////////////
+
+    $(function(){
+        $(document).on('click', '#ajax-comment-add', function(e) {
+            e.preventDefault();
+            var post_id = $(this).attr('name');
+            var content = $('#comment-input-'+post_id+'>input[type=text]').val();
+            console.log(content);
+
+        });
+    });
+
+    //////////// 댓글 삭제 ////////////
+
+    $(function(){
+        $(document).on('click', '.ajax-comment-delete', function(e) {
+            e.preventDefault();     // ajax 통신 시, 화면이 맨위로 올라가는 것을 방지
+
+            var url = $(this).attr('href');
+            var target_id = $(this).data('target-id');
+            var message = $(this).data('message');
+
+            if(confirm(message)) {
+                $.post(url)
+                    .done(function() {
+                        $('#' + target_id).remove();
+                        }
+                    )
+                    .fail(function(xhr, textStatus, error) {
+                        alert('failed:' + error);
+                    })
+            }
+        });
+    });
+</script>

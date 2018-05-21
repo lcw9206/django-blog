@@ -31,9 +31,7 @@
         </div><hr/>
 
         {% if user.is_authenticated %}
-            <form action="{% url 'post:comment_new' post.id %}" method="POST" class="comment-input">
-                {% csrf_token %}
-
+            <div id="comment-input-{{ post.id }}">
                 {% if user.profile.profile_thumbnail %}
                     <img src="{{ user.profile.profile_thumbnail.url }}" class="comment-thumbnail"/>
                 {% else %}
@@ -41,8 +39,8 @@
                 {% endif %}
 
                 {{ comment_form.content }}
-                <input type="submit" value="등록" id="ajax-comment-add" class="btn btn-default comment-submit">
-            </form>
+                <input type="submit" value="등록" id="ajax-comment-add" class="btn btn-default comment-submit" name="{{ post.id }}">
+            </div>
         {% endif %}
 
         {% if post.comments.all %}
@@ -61,10 +59,7 @@
                             <div class="divTableCell">{{ comment.created_at }}</div>
                             <div class="divTableCell">
                                 {% if comment.author == user %}
-                                    <form action="{% url 'post:comment_delete' post.id comment.id %}" method="POST">
-                                        {% csrf_token %}
-                                        <input type="submit" class="btn btn-default comment-delete" value="삭제" onclick="return confirm('삭제하시겠습니까?')"></input>
-                                    </form>
+                                    <a href="{% url 'post:comment_delete' post.id comment.id %}" class="ajax-comment-delete" data-target-id="comment-{{ comment.id }}" data-message="정말 삭제하시겠습니까?">삭제</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -95,6 +90,7 @@
             </table>
         {% endif %}
     </div>
+    {% include "post/script.html" %}
 {% endblock %}
 
 {% block sidebar %}
@@ -112,48 +108,3 @@
     </div><!--/.sidebar-offcanvas-->
 {% endblock %}
 
-{% block extra_body %}
-    <script>
-        //////////// 댓글 더보기 ////////////
-
-        $('#load-more-btn').click(function() {
-            var post_id = $(this).attr('value');
-            $('#load-more-btn').hide();
-
-            $.ajax({
-                type: 'POST',
-                url: "{% url 'post:post_detail' post.id %}",
-                data: {
-                    'post_id': post_id,
-                },
-
-                success: function(data, textStatus, jqXHR) {
-                    $('#load-comment').append(data);
-                },
-                dataType: 'html'
-            });
-        });
-
-        //////////// 댓글 삭제 ////////////
-
-        $(function(){
-            $(document).on('click', '.ajax-comment-delete', function(e) {
-                e.preventDefault();
-
-                var url = $(this).attr('href');
-                var target_id = $(this).data('target-id');
-                var message = $(this).data('message');
-                if(confirm(message)) {
-                    $.post(url)
-                        .done(function() {
-                            $('#' + target_id).remove();
-                            }
-                        )
-                        .fail(function(xhr, textStatus, error) {
-                            alert('failed:' + error);
-                        })
-                }
-            });
-        });
-    </script>
-{% endblock %}
