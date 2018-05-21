@@ -43,17 +43,20 @@
             </div>
         {% endif %}
 
-        {% if post.comments.all %}
-            <div class="divTable">
-                <div class="divTableBody">
-                    <div class="divTableRowHeader">
-                        <div class="divTableCell">작성자</div>
-                        <div class="divTableCell">내용</div>
-                        <div class="divTableCell">작성일</div>
-                        <div class="divTableCell">&nbsp;</div>
-                    </div>
+        <div class="divTable">
+            <div class="divTableBody">
+                <div class="divTableRowHeader">
+                    <div class="divTableCell">작성자</div>
+                    <div class="divTableCell">내용</div>
+                    <div class="divTableCell">작성일</div>
+                    <div class="divTableCell">&nbsp;</div>
+                </div>
+            </div>
+            <div class="divTableBody" id="comment-ajax-{{ post.id }}"></div>
+            <div class="divTableBody">
+                {% if post.comments.all %}
                     {% for comment in post.comments.all|slice:":3" %}
-                        <div class="divTableRow origin-Table" id="comment-{{ comment.id }}">
+                        <div class="divTableRow" id="comment-{{ comment.id }}">
                             <div class="divTableCell">{{ comment.author }}</div>
                             <div class="divTableCell">{{ comment.content }}</div>
                             <div class="divTableCell">{{ comment.created_at }}</div>
@@ -64,13 +67,19 @@
                             </div>
                         </div>
                     {% endfor %}
-                    <div class="divTableRow" id="ajax-comment-add-list"></div>
-                </div>
-                <div id="load-comment" class="divTableBody"></div>
+                {% else %}
+                    <div class="divTableRow">
+                        <div class="divTableCell">&nbsp;</div>
+                        <div class="divTableCell">&nbsp;</div>
+                        <div class="divTableCell">&nbsp;</div>
+                        <div class="divTableCell">&nbsp;</div>
+                    </div>
+                {% endif %}
             </div>
-            {% if post.comments.all.count > 3 %}
-                <a id="load-more-btn" value="{{ post.id }}" class="btn btn-default">댓글 더보기</a>
-            {% endif %}
+            <div class="divTableBody" id="load-comment"></div>
+        </div>
+        {% if post.comments.all.count > 3 %}
+            <a id="load-more-btn" value="{{ post.id }}" class="btn btn-default">댓글 더보기</a>
         {% endif %}
 
         {% if category %}

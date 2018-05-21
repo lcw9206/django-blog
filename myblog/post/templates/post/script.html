@@ -28,9 +28,22 @@
         $(document).on('click', '#ajax-comment-add', function(e) {
             e.preventDefault();
             var post_id = $(this).attr('name');
-            var content = $('#comment-input-'+post_id+'>input[type=text]').val();
-            console.log(content);
+            var content = $('#id_content').val();
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'post:comment_new' post.id %}",
+                data: {
+                    'id': post_id,
+                    'content': content
+                },
 
+                success: function(data, textStatus, jqXHR) {
+                    alert('abdd');
+                    $('#comment-ajax-'+ post_id ).append(data);
+                    $('#id_content').val("");
+                },
+                dataType: "html",
+            });
         });
     });
 
@@ -48,6 +61,9 @@
                 $.post(url)
                     .done(function() {
                         $('#' + target_id).remove();
+                        if($('#'+ target_id).val()){
+                            $('divtable').hide();
+                        }
                         }
                     )
                     .fail(function(xhr, textStatus, error) {

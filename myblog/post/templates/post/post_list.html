@@ -39,7 +39,7 @@
 {% block sidebar %}
     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
         <div class="list-group">
-            <a href="{% url "post:post_list" %}" class="list-group-item active">전체글</a>
+            <a href="{% url "post:post_list" %}" class="list-group-item">전체글</a>
             {% if user.is_authenticated %}
                 <a href="{% url "post:my_post_list" %}" class="list-group-item">내 게시글</a>
             {% endif %}
