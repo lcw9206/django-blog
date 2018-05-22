@@ -24,3 +24,7 @@
 .page-wrap {
     min-height: 600px;
 }
+
+.page_error {
+    text-align: center;
+}
