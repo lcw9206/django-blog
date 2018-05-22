@@ -11,7 +11,7 @@
                 {% if user.profile.profile_thumbnail %}
                     <img src="{{ user.profile.profile_thumbnail.url }}" class="img-thumbnail" width="130" height="130"/>
                 {% else %}
-                    <img src="{% static "images/default.jpeg" %}" width="130" height="130"/>
+                    <img src="{% static 'images/default.jpeg' %}" width="130" height="130"/>
                 {% endif %}
             </div>
             <div class="profile-wrap">
@@ -45,8 +45,8 @@
                     </div>
                 </div>
                 <div class="profile-btn-list">
-                    <a class="btn btn-default" href="{% url "profile_change" %}">프로필 수정</a>
-                    <a class="btn btn-default" href="{% url "password_change" %}">비밀번호 변경</a>
+                    <a class="btn btn-default" href="{% url 'profile_change' %}">프로필 수정</a>
+                    <a class="btn btn-default" href="{% url 'password_change' %}">비밀번호 변경</a>
                 </div>
             </div>
         </div>
