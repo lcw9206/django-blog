@@ -1,0 +1,6 @@
+django >=1.9.1
+django-imagekit==4.0.2
+django-extensions==1.9.9
+django-el-pagination==3.2.4
+ipython[notebook]
+django-bootstrap3==9.1.0
