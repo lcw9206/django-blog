@@ -1,0 +1,41 @@
+{% extends 'post/layout.html' %}
+
+{% block content %}
+    <div class="row post-form-row">
+        <div class="post-form-layout">
+            <form action="" class="post_form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="post-form-text">
+                <h1>New Post</h1>
+            </div>
+            <div class="post-form-wrap">
+                    <div class="post-form-box">
+                        <label for="id-title">제목</label>
+                            {{ form.title }}
+                    </div>
+                </div>
+                <div class="post-form-wrap">
+                    <div class="post-form-box">
+                        <label for="id-category">카테고리</label>
+                        {{ form.category }}
+                    </div>
+                </div>
+                <div class="post-form-thumbnail-wrap">
+                    <div class="post-form-box">
+                        <label for="id-post-thumbnail">사진</label>
+                            {{ form.post_thumbnail }}
+                    </div>
+                </div>
+                <div class="post-form-input-wrap">
+                    <div class="post-form-content">
+                        {{ form.content }}
+                    </div>
+                </div>
+                <div class="post-form-btn">
+                    <button class="btn btn-default" type="submit">게시</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% for comment in post.comments.all|slice:"3:" %}
+    <div class="divTableRow" id="comment-{{ comment.id }}">
+        <div class="divTableCell">{{ comment.author }}</div>
+        <div class="divTableCell">{{ comment.content }}</div>
+        <div class="divTableCell">{{ comment.created_at }}</div>
+        <div class="divTableCell">
+            {% if comment.author == user %}
+                <a href="{% url 'post:comment_delete' post.id comment.id %}" class="ajax-comment-delete" data-target-id="comment-{{ comment.id }}" data-message="정말 삭제하시겠습니까?">삭제</a>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}

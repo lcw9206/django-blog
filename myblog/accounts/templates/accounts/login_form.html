@@ -1,0 +1,29 @@
+{% extends 'accounts/layout.html' %}
+
+{% block content %}
+<div class="row login-row">
+    <div class="login-layout">
+        <form action="" class="login_form" method="POST">
+            {% csrf_token %}
+            <div class="login-text">
+                <h1>Blog</h1>
+            </div>
+            <div class="login-wrap">
+                <div class="login-box">
+                    <label for="id-login-username">아이디</label>
+                    {{ form.username }}
+                </div>
+            </div>
+            <div class="login-wrap">
+                <div class="login-box">
+                    <label for="id-password">패스워드</label>
+                    {{ form.password }}
+                </div>
+            </div>
+            <div class="login-btn">
+                <button class="btn btn-default" type="submit">로그인</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
