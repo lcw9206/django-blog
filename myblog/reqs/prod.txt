@@ -1,5 +1,0 @@
--r common.txt
-
-django-storages
-boto3
-pymysql
