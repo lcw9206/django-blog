@@ -65,7 +65,7 @@
 
 .user-inform-5 {
     float: right;
-    padding-right: 50px;
+    padding-right: 60px;
 }
 
 .user-intro {
@@ -89,7 +89,7 @@
 
 .password-change-wrap {
     height: 50px;
-    padding: 20px 0px 0px 50px;
+    padding: 20px 0px 0px 70px;
     text-align: left;
     font-size: 15px;
 }
@@ -103,13 +103,9 @@
 }
 
 .profile-change-intro-wrap {
-    padding: 10px 50px 20px 20px;
-    text-align: left;
+    text-align: center;
     font-size: 15px;
-}
-
-.profile-change-content {
-    padding-left: 8%;
+    padding: 20px 0;
 }
 
 label[for=id-profile-username] {
@@ -133,7 +129,6 @@ label[for=id-new-password-confirm] {
 }
 
 label[for=id-profile-intro] {
-    margin-left: 42%;
     font-size: 17px;
 }
 
@@ -208,7 +203,7 @@ label[for=id-password] {
 }
 
 .login-wrap {
-    padding: 20px;
+    padding: 13px 30px;
     text-align: left;
     font-size: 16px;
 }
