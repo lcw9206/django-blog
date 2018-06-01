@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-from os.path import abspath, dirname, join
+from os.path import abspath, dirname
+import raven
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -24,9 +24,6 @@ BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 SECRET_KEY = 'vw%8)6(fw$^(ix)=#jodb7$*r2o(8_j==ig79vi_&bs7=2!=-1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = ["127.0.0.1"]
 
@@ -44,6 +41,7 @@ INSTALLED_APPS = [
     'el_pagination',
     'accounts.apps.AccountsConfig',
     'post.apps.PostConfig',
+    'raven.contrib.django.raven_compat',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -124,14 +122,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
+GIT_ROOT = os.path.join(BASE_DIR, '..') # FIXME: 현 프로젝트 ROOT 지정
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'myblog', 'static'),
-]
+if os.path.exists(os.path.join(GIT_ROOT, '.git')):
+    release = raven.fetch_git_sha(GIT_ROOT) # 현재 최근 커밋해시 획득
+else:
+    release = 'prod'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-MEDIA_URL = '/media/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+RAVEN_CONFIG = {
+    'release': release,
+    # FIXME: 각자 설정에 맞춰 수정 - https://docs.sentry.io/clients/python/integrations/django/
+    'dsn': 'https://8d9d150ad9a1405ca86753bd1c508f98:24802fab7c3141f0b0d90d933a93ccc3@sentry.io/1216679',
+}

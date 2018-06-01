@@ -31,7 +31,7 @@
         </div><hr/>
 
         {% if user.is_authenticated %}
-            <div id="comment-input-{{ post.id }}">
+            <div id="comment-input-{{ post.id }}" class="comment-input">
                 {% if user.profile.profile_thumbnail %}
                     <img src="{{ user.profile.profile_thumbnail.url }}" class="comment-thumbnail"/>
                 {% else %}
@@ -83,16 +83,14 @@
             <a id="load-more-btn" value="{{ post.id }}" class="btn btn-default">댓글 더보기</a>
         {% endif %}
 
-        <table class="table table-hover category-table">
+        <table class="table table-hover category-table table-striped">
             <tr>
                 <th>'{{ post.category }}' 카테고리의 다른 글</th>
-                <th>&nbsp;&nbsp;&nbsp;</th>
                 <th></th>
             </tr>
             {% for post_list in category %}
                 <tr>
                     <td><a href="{% url 'post:post_detail' post_list.id %}">{{ post_list.title }}</a></td>
-                    <td></td>
                     <td>{{ post_list.created_at }}</td>
                 </tr>
             {% endfor %}

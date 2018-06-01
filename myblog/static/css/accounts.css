@@ -15,7 +15,7 @@
 }
 
 .password-change-layout {
-    width: 400px;
+    width: 430px;
     min-height: 430px;
     margin-left: 33%;
     border: 1px solid #ddd;
@@ -112,13 +112,6 @@
     padding-left: 8%;
 }
 
-.post-form-input-wrap {
-    height: 250px;
-    padding: 20px 50px 20px 20px;
-    text-align: left;
-    font-size: 15px;
-}
-
 label[for=id-profile-username] {
     font-size: 17px;
 }
@@ -177,24 +170,23 @@ label[for=id-profile-change-thumbnail] {
 }
 
 .login-btn {
-    margin: 40px 10px 10px 41%;
+    margin: 0px 41%;
 }
 
 label[for=id-login-username] {
-    margin-left: 11%;
+    margin-left: 19%;
     font-size: 17px;
 }
 
 label[for=id-password] {
-    margin-left: 11%;
+    margin-left: 19%;
     font-size: 17px;
 }
 
 .signup-layout {
     max-width: 400px;
     border: 1px solid #ddd;
-    margin-left: 33%;
-    margin-top: 50px;
+    margin: 50px auto;
 }
 
 .login-layout {
@@ -205,39 +197,37 @@ label[for=id-password] {
     height: 270px;
 }
 
-.signup-row, .login-row, .post-form-row, .profile-row {
+.login-row, .post-form-row, .profile-row {
     min-height: 600px;
 }
 
 .signup-wrap {
-    height: 60px;
-    padding: 20px;
+    padding: 5px 16px;
     text-align: left;
     font-size: 16px;
 }
 
 .login-wrap {
-    height: 50px;
     padding: 20px;
     text-align: left;
     font-size: 16px;
 }
 
 .errorlist {
-    padding: 5px 0px 0px 134px;
+    padding: 5px 0 0 20px;
 }
 
-.signup-form, .post_form {
+.post_form {
     height: 450px;
 }
 
-.signup-box, .login-box {
+.signup-box {
     width: 100%;
-    padding: 10px 0px 0px 30px;
+    padding: 10px 0 0 20px;
 }
 
-.signup-thumbnail-box {
-    margin-top: 15px;
+.login-box {
+    width: 100%;
 }
 
 .signup-text, .login-text, .post-form-text {
@@ -246,11 +236,8 @@ label[for=id-password] {
 }
 
 .signup-btn {
-    height: 100px;
-}
-
-.complete-btn {
-    margin: 50px 0px 0px 38%;
+    height: 70px;
+    margin: 20px 41% 0;
 }
 
 #id_username, #id_email, #id_password1, #id_password2 {
@@ -260,4 +247,8 @@ label[for=id-password] {
 
 label[for=id-profile-thumbnail] {
     margin-left: 40%;
+}
+
+.signup-thumbnail-box {
+    padding: 20px 0 0;
 }

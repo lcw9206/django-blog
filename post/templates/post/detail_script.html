@@ -32,23 +32,27 @@
             e.preventDefault();
             var post_id = $(this).attr('name');
             var content = $('#id_content').val();
-            $.ajax({
-                type: 'POST',
-                url: "{% url 'post:comment_new' post.id %}",
-                data: {
-                    'content': content
-                },
-                dataType: "html",
+            if(content != '') {
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'post:comment_new' post.id %}",
+                    data: {
+                        'content': content
+                    },
+                    dataType: "html",
 
-                success: function(data, textStatus, jqXHR) {
-                    alert('댓글이 등록되었습니다.');
-                    $('#comment-ajax-'+ post_id ).append(data);
-                    $('#id_content').val("");
-                },
-                error: function(request, status, error) {
-                    alert('댓글 등록에 문제가 발생했습니다.');
-                }
-            });
+                    success: function (data, textStatus, jqXHR) {
+                            alert('댓글이 등록되었습니다.');
+                        $('#comment-ajax-' + post_id).append(data);
+                        $('#id_content').val("");
+                    },
+                    error: function (request, status, error) {
+                        alert('댓글 등록에 문제가 발생했습니다.');
+                    }
+                });
+            } else {
+                alert('내용을 입력해주세요.');
+            }
         });
     });
 

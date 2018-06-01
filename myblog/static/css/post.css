@@ -1,8 +1,6 @@
 .col-sm-9 {
     border: 1px solid #ddd;
-    width: 835px;
-    height: 202px;
-    padding-left: 0px;
+    padding-left: 8px;
 }
 
 .detail-title {
@@ -43,18 +41,18 @@
 
 .comment-submit {
     height: 100px;
-    margin-top: -90px;
+    margin-bottom: 93px;
 }
 
 .comment-input {
-    height: 130px;
+    height: 100px;
 }
 
 .comment-thumbnail {
     display: inline-block;
     width: 100px;
     padding: 4px;
-    margin-top: -90px;
+    margin-bottom: 92px;
     line-height: 1.42857143;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -86,25 +84,19 @@
 
 .post-form-input-wrap {
     height: 250px;
-    padding: 20px 50px 20px 20px;
     text-align: left;
     font-size: 15px;
 }
 
 .post-form-wrap {
-    height: 50px;
-    padding: 20px;
+    padding: 10px;
     text-align: left;
     font-size: 15px;
 }
 
-.post-form-content {
-    padding-left: 8%;
-}
-
 .post-form-thumbnail-wrap {
+    text-align: center;
     height: 50px;
-    padding-top:10px
 }
 
 #id_title {
@@ -132,12 +124,15 @@ label[for=id-category] {
 }
 
 label[for=id-post-thumbnail] {
-    margin-left: 44%;
     font-size: 17px;
 }
 
 .post-form-btn {
     text-align: center;
+}
+
+.post-form-content {
+    padding: 20px 16%;
 }
 
 .jumbotron {
@@ -147,23 +142,21 @@ label[for=id-post-thumbnail] {
 }
 
 .pull-right {
-    margin-top: 100px;
+    margin-top: 110px;
     margin-right: -50px;
-}
-
-.post_new {
-    margin-right: 5px;
-    margin-top: 6px;
+    height: 40px;
 }
 
 .form-inline {
     float: right;
+    padding-left: 10px;
+    margin-top: -6px;
 }
 
 .glyphicon-search {
     font-size: 20px;
     height: 34px;
-    top: 6px;
+    top: 8px;
 }
 
 .list-title {
@@ -185,6 +178,7 @@ label[for=id-post-thumbnail] {
 .divTable{
 	display: table;
 	width: 95%;
+    padding-top: 15px;
 }
 
 .divTableRowHeader {
@@ -234,3 +228,8 @@ label[for=id-post-thumbnail] {
 #ajax-comment-add-list {
     display: none;
 }
+
+.category-table > tbody > tr > td, th {
+    padding-left : 20px;
+}
+

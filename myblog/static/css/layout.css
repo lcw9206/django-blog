@@ -23,9 +23,13 @@
 }
 
 .page-wrap {
-    min-height: 600px;
+    min-height: 900px;
 }
 
 .page_error {
     text-align: center;
+}
+
+.menu {
+    margin-top: 4px;
 }
