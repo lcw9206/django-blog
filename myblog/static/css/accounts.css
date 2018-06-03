@@ -16,7 +16,6 @@
 
 .password-change-layout {
     width: 430px;
-    min-height: 430px;
     margin-left: 33%;
     border: 1px solid #ddd;
 }
@@ -63,9 +62,16 @@
     padding-left: 17px;
 }
 
-.user-inform-5 {
-    float: right;
-    padding-right: 60px;
+.user-inform-old-password {
+    margin-left: 18px;
+}
+
+.user-inform-new-password1 {
+    margin-left: 31px;
+}
+
+.user-inform-new-password2 {
+    margin-left: 2px;
 }
 
 .user-intro {
@@ -88,9 +94,7 @@
 }
 
 .password-change-wrap {
-    height: 50px;
-    padding: 20px 0px 0px 70px;
-    text-align: left;
+    padding: 5px 0px 0px 18%;
     font-size: 15px;
 }
 
@@ -149,32 +153,33 @@ label[for=id-profile-change-thumbnail] {
 
 .password-change-btn {
     text-align: center;
-    margin-top: 30px;
+    margin: 20px;
 }
 
 .password-help-text {
     height: 100px;
-    padding: 20px 0px 0px 30px;
+    padding: 20px 0px 0px 50px;
+    text-align: left;
     margin-bottom: 10px;
     color: #9d9d9d;
 }
 
 #id_password {
     float: right;
-    margin-right: 40px;
+    margin-right: 60px;
 }
 
 .login-btn {
-    margin: 0px 41%;
+    margin: 0px 41% 20px;
 }
 
 label[for=id-login-username] {
-    margin-left: 19%;
+    margin-left: 14%;
     font-size: 17px;
 }
 
 label[for=id-password] {
-    margin-left: 19%;
+    margin-left: 14%;
     font-size: 17px;
 }
 
@@ -189,7 +194,6 @@ label[for=id-password] {
     border: 1px solid #ddd;
     margin-left: 33%;
     margin-top: 50px;
-    height: 270px;
 }
 
 .login-row, .post-form-row, .profile-row {
@@ -209,16 +213,12 @@ label[for=id-password] {
 }
 
 .errorlist {
-    padding: 5px 0 0 20px;
-}
-
-.post_form {
-    height: 450px;
+    padding: 5px 0 0 130px;
 }
 
 .signup-box {
     width: 100%;
-    padding: 10px 0 0 20px;
+    padding: 10px 0 0 50px;
 }
 
 .login-box {
@@ -237,7 +237,7 @@ label[for=id-password] {
 
 #id_username, #id_email, #id_password1, #id_password2 {
     float: right;
-    margin-right: 40px;
+    margin: -2px 60px 0px 0px;
 }
 
 label[for=id-profile-thumbnail] {

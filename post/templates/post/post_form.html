@@ -12,12 +12,14 @@
                     <div class="post-form-box">
                         <label for="id-title">제목</label>
                             {{ form.title }}
+                            {{ form.title.errors }}
                     </div>
                 </div>
                 <div class="post-form-wrap">
                     <div class="post-form-box">
                         <label for="id-category">카테고리</label>
                         {{ form.category }}
+                        {{ form.category.errors }}
                     </div>
                 </div>
                 <div class="post-form-thumbnail-wrap">
@@ -27,9 +29,8 @@
                     </div>
                 </div>
                 <div class="post-form-input-wrap">
-                    <div class="post-form-content">
-                        {{ form.content }}
-                    </div>
+                    {{ form.content }}
+                    {{ form.content.errors }}
                 </div>
                 <div class="post-form-btn">
                     <button class="btn btn-default" type="submit">게시</button>

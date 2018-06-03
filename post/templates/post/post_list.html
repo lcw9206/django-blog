@@ -16,7 +16,7 @@
         </div>
         <div class="row">
             {% for post in post_list %}
-            <div class="col-xs-6 col-lg-4">
+            <div class="col-xs-6 col-lg-4 post_list">
                 <a href="{% url 'post:post_detail' post.id %}">
                     {% if post.post_thumbnail %}
                         <img src="{{ post.post_thumbnail.url }}"/>

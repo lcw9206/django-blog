@@ -1,6 +1,5 @@
 .col-sm-9 {
     border: 1px solid #ddd;
-    padding-left: 8px;
 }
 
 .detail-title {
@@ -79,24 +78,18 @@
     border: 1px solid #ddd;
     margin-left: 28%;
     margin-top: 50px;
-    height: 530px;
 }
 
 .post-form-input-wrap {
-    height: 250px;
     text-align: left;
     font-size: 15px;
+    margin: 20px 0px 0px 12%;
 }
 
 .post-form-wrap {
     padding: 10px;
     text-align: left;
     font-size: 15px;
-}
-
-.post-form-thumbnail-wrap {
-    text-align: center;
-    height: 50px;
 }
 
 #id_title {
@@ -106,29 +99,31 @@
 
 #id_category {
     float: right;
-    margin-right: 100px;
+    margin-right: 160px;
 }
 
 #id_post_thumbnail {
-    margin-left: 29%;
+    margin-left: 21%;
 }
 
 label[for=id-title] {
-    margin-left: 20%;
+    margin-left: 13%;
     font-size: 17px;
 }
 
 label[for=id-category] {
-    margin-left: 20%;
+    margin-left: 13%;
     font-size: 17px;
 }
 
 label[for=id-post-thumbnail] {
     font-size: 17px;
+    padding-left: 35%;
 }
 
 .post-form-btn {
     text-align: center;
+    margin: 25px;
 }
 
 .post-form-content {
@@ -138,7 +133,6 @@ label[for=id-post-thumbnail] {
 .jumbotron {
     background-image: url("/static/images/default_jumbotron.png");
     height: 200px;
-    width: 833px;
 }
 
 .pull-right {
@@ -233,3 +227,14 @@ label[for=id-post-thumbnail] {
     padding-left : 20px;
 }
 
+.post_list {
+    padding-left: 11px;
+}
+
+.post-form-box {
+    padding-left: 70px;
+}
+
+#id_content {
+    margin-left: 5%;
+}

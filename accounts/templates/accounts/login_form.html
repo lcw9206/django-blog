@@ -13,12 +13,14 @@
                     <div class="login-box">
                         <label for="id-login-username">아이디</label>
                         {{ form.username }}
+                        {{ form.username.errors }}
                     </div>
                 </div>
                 <div class="login-wrap">
                     <div class="login-box">
                         <label for="id-password">패스워드</label>
                         {{ form.password }}
+                        {{ form.password.errors }}
                     </div>
                 </div>
             </div>
