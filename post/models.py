@@ -58,6 +58,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='생성일자')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='수정일자')
     category = models.ForeignKey(Category, null=False, verbose_name='카테고리')
+    visits = models.IntegerField(blank=True, verbose_name='조회 수')
 
     class Meta:
         ordering = ['-created_at']

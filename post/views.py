@@ -10,6 +10,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 def post_list(request, list_queryset=None, kind=None):
     category_list = Category.objects.all()
+    all_posts = Post.objects.all()
     search = request.GET.get('search', '')
 
     if list_queryset is None:
@@ -34,6 +35,7 @@ def post_list(request, list_queryset=None, kind=None):
         })
 
     return render(request, 'post/post_list.html', {
+        'all_posts': all_posts,
         'post_list': posts,
         'category_list': category_list,
         'search': search,
@@ -52,10 +54,11 @@ def category_post_list(request, category_id):
 
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
+    Post.objects.filter(pk=post_id).update(visits = post.visits + 1)
     comment_form = CommentForm()
-    print(post.category.id)
     recent_category = Post.objects.filter(category_id=post.category.id).filter(id__lt=post_id)[:5]
     category_list = Category.objects.all()
+    all_posts = Post.objects.all()
 
     if request.is_ajax():  # Ajax request 여부 확인
         return render(request, 'post/comment_list_ajax.html', {
@@ -64,6 +67,7 @@ def post_detail(request, post_id):
         })
 
     return render(request, 'post/post_detail.html', {
+        'all_posts': all_posts,
         'post': post,
         'comment_form': comment_form,
         'category': recent_category,

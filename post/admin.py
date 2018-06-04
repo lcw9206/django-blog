@@ -6,7 +6,7 @@ from .models import Post, Category, Comment
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('user', 'id', 'title', 'content', 'post_thumbnail', 'category', 'created_at', 'updated_at', )
+    list_display = ('user', 'id', 'title', 'content', 'post_thumbnail', 'category', 'visits', 'created_at', 'updated_at', )
     list_per_page = 5
     list_editable = ('category', )
     search_fields = ('user', )
