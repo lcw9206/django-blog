@@ -1,20 +1,18 @@
 <script>
+
     //////////// 댓글 더보기 ////////////
 
     $(function(){
         $(document).on('click', '#load-more-btn', function(e) {
             e.preventDefault();
-
             var post_id = $(this).attr('value');
             $('#load-more-btn').hide();
-
             $.ajax({
                 type: 'POST',
                 url: "{% url 'post:post_detail' post.id %}",
                 data: {
                     'post_id': post_id
                 },
-
                 success: function(data, textStatus, jqXHR) {
                     $('#load-comment').append(data);
                 },
@@ -40,7 +38,6 @@
                         'content': content
                     },
                     dataType: "html",
-
                     success: function (data, textStatus, jqXHR) {
                             alert('댓글이 등록되었습니다.');
                         $('#comment-ajax-' + post_id).append(data);
@@ -61,11 +58,9 @@
     $(function(){
         $(document).on('click', '.ajax-comment-delete', function(e) {
             e.preventDefault();     // ajax 통신 시, 화면이 맨위로 올라가는 것을 방지
-
             var url = $(this).attr('href');
             var target_id = $(this).data('target-id');
             var message = $(this).data('message');
-
             if(confirm(message)) {
                 $.post(url)
                     .done(function() {
