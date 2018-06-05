@@ -12,28 +12,24 @@
                     <div class="signup-box">
                         <label for="id-username">아이디</label>
                         {{ form.username }}
-                        {{ form.username.errors }}
                     </div>
                 </div>
                 <div class="signup-wrap">
                     <div class="signup-box">
                         <label for="id-email">이메일</label>
                         {{ form.email }}
-                        {{ form.email.errors }}
                     </div>
                 </div>
                 <div class="signup-wrap">
                     <div class="signup-box">
                         <label for="id-password1">비밀번호</label>
                         {{ form.password1 }}
-                        {{ form.password1.errors }}
                     </div>
                 </div>
                 <div class="signup-wrap">
                     <div class="signup-box">
                         <label for="id-password2">비밀번호 확인</label>
                         {{ form.password2 }}
-                        {{ form.password2.errors }}
                     </div>
                 </div>
                 <div class="signup-wrap">
@@ -48,4 +44,5 @@
             </form>
         </div>
     </div>
+    {% include 'post/modal.html' %}
 {% endblock %}

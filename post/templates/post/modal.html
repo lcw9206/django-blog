@@ -1,0 +1,30 @@
+{% if form.errors %}
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">입력을 수정해주세요.</h4>
+                </div>
+                <div class="modal-body">
+                    {% for field in form %}
+                        {% if field.errors %}
+                            <p class="text-warning"><small>{{ field.label }}: {{ field.errors|striptags }}</small></p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<script>
+    //////////// Modal 띄우기 ////////////
+
+    $(document).ready(function(){
+		$("#myModal").modal('show');
+	});
+</script>

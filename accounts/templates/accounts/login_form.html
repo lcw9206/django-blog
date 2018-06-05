@@ -1,33 +1,32 @@
 {% extends 'accounts/layout.html' %}
 
 {% block content %}
-<div class="row login-row">
-    <div class="login-layout">
-        <form action="" class="login_form" method="POST">
-            {% csrf_token %}
-            <div class="login-text">
-                <h1>Blog</h1>
-            </div>
-            <div class="form-group">
-                <div class="login-wrap">
-                    <div class="login-box">
-                        <label for="id-login-username">아이디</label>
-                        {{ form.username }}
-                        {{ form.username.errors }}
+    <div class="row login-row">
+        <div class="login-layout">
+            <form action="" class="login_form" method="POST">
+                {% csrf_token %}
+                <div class="login-text">
+                    <h1>Blog</h1>
+                </div>
+                <div class="form-group">
+                    <div class="login-wrap">
+                        <div class="login-box">
+                            <label for="id-login-username">아이디</label>
+                            {{ form.username }}
+                        </div>
+                    </div>
+                    <div class="login-wrap">
+                        <div class="login-box">
+                            <label for="id-password">패스워드</label>
+                            {{ form.password }}
+                        </div>
                     </div>
                 </div>
-                <div class="login-wrap">
-                    <div class="login-box">
-                        <label for="id-password">패스워드</label>
-                        {{ form.password }}
-                        {{ form.password.errors }}
-                    </div>
+                <div class="login-btn">
+                    <button class="btn btn-default" type="submit">로그인</button>
                 </div>
-            </div>
-            <div class="login-btn">
-                <button class="btn btn-default" type="submit">로그인</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
+    {% include 'post/modal.html' %}
 {% endblock %}
