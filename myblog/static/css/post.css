@@ -74,7 +74,7 @@
 }
 
 .post-form-layout {
-    max-width: 450px;
+    max-width: 460px;
     border: 1px solid #ddd;
     margin-left: 28%;
     margin-top: 50px;
@@ -83,7 +83,8 @@
 .post-form-input-wrap {
     text-align: left;
     font-size: 15px;
-    margin: 20px 0px 0px 16%;
+    text-align: center;
+    padding-top: 20px;
 }
 
 .post-form-wrap {
@@ -94,7 +95,8 @@
 
 #id_title {
     float: right;
-    margin-right: 100px;
+    margin-right: 26%;
+    width: 149px;
 }
 
 #id_category {
@@ -103,22 +105,18 @@
 }
 
 #id_post_thumbnail {
-    margin-left: 21%;
+    padding: 3px 130px;
 }
 
-label[for=id-title] {
-    margin-left: 13%;
+label[for=id-title], label[for=id-category] {
+    margin-left: 17%;
     font-size: 17px;
 }
 
-label[for=id-category] {
-    margin-left: 13%;
-    font-size: 17px;
-}
 
 label[for=id-post-thumbnail] {
     font-size: 17px;
-    padding-left: 35%;
+    text-align: center;
 }
 
 .post-form-btn {
@@ -231,6 +229,11 @@ label[for=id-post-thumbnail] {
     padding-left: 11px;
 }
 
+.list-img {
+    width: 262px;
+    height: 262px;
+}
+
 .post-form-box {
-    padding-left: 70px;
+    text-align: center;
 }
